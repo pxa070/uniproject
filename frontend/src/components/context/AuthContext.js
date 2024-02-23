@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
+
 // Create the context with a default value
 export const AuthContext = createContext({
     isLoggedIn: false,

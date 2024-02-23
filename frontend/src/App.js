@@ -7,7 +7,7 @@ import Login from './components/pages/Login';
 import SignUp from './components/pages/SignUp';
 import SubjectAreas from "./components/pages/SubjectAreas";
 import Footer from "./components/common/footer";
-
+import './axiosConfig';
 import Profile from "./components/pages/Profile";
 import UploadQuestion from "./components/pages/UploadQuestion";
 

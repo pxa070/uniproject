@@ -1,19 +1,20 @@
+const { Pool } = require('pg'); // PostgreSQL client
+const sequelize = require('./database');// If you're using Sequelize
 require('dotenv').config(); // Loads environment variables from .env file
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { Pool } = require('pg'); // PostgreSQL client
 const validator = require('validator');
 const cors = require('cors');
 const analyzeQuestion = require('./models/analyser');
 const fetchResources = require('./models/search');
-const authMiddleware = require('/middleware/auth')
+const authMiddleware = require('./middleware/auth')
 
 
 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors()); // Enable CORS
@@ -29,8 +30,8 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 });
 
-
-function authenticate(req, res, next) {
+/*
+ function authenticate(req, res, next) {
   try {
     const token = req.headers.authorization?.split(' ')[1]; // Updated and optional chaining
     if (!token) return res.status(401).send({ message: 'Missing authorization token' });
@@ -41,7 +42,7 @@ function authenticate(req, res, next) {
   } catch (error) {
     res.status(401).send({ message: 'Authentication failed' });
   }
-}
+} */
 // User registration endpoint
 
 // Import your Question model here
@@ -86,7 +87,7 @@ app.post('/api/questions', async (req, res) => {
 
 
 // Import Submission model (create this if not already defined)
-const Submission = require('/models/Submission');
+const Submission = require('./models/Submission');
 
 app.post('/api/questions/:questionId/submissions', async (req, res) => {
   try {
@@ -131,33 +132,43 @@ app.get('/api/users/:userId', authMiddleware, async (req, res) => {
   }
 });
 
-
+// Simplified JWT payload for the example
+function generateToken(userId) {
+  return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '1h' });
+}
 
 
 app.post('/api/signup', async (req, res) => {
   const { username, email, password } = req.body;
 
   // Validate email format
-  if (!validator.isEmail(email)) {
-    return res.status(400).send({ message: 'Invalid email format' });
-  }
+  // if (!validator.isEmail(email)) {
+   //  return res.status(400).send({ message: 'Invalid email format' });
+     // }
 
   // Hash password
-  const hashedPassword = await bcrypt.hash(password, 10);
-
   try {
-    // Insert user into database
-    const result = await pool.query(
-        'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING user_id, username, email, created_at',
-        [username, email, hashedPassword]
-    );
-    // Return new user info, excluding password
-    res.status(201).json(result.rows[0]);
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const result = await pool.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id', [username, email, hashedPassword]);
+    const token = generateToken(result.rows[0].id); // Generate JWT token after successful registration
+    res.status(201).json({ token });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: 'Server error during registration' });
+    res.status(500).send('Server error during registration');
   }
 });
+
+// Include your routes for questions, submissions, and user details here
+
+// Authentication middleware now uses simplified JWT token handling
+app.use(authMiddleware);
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+
+
 
 // User login endpoint
 app.post('/api/login', async (req, res) => {
@@ -191,7 +202,7 @@ app.post('/api/login', async (req, res) => {
 // Authentication middleware (this is a simplified example, you should implement actual token verification)
 
 
-app.post('/api/questions/:questionId/feedback', authenticate, async (req, res) => {
+app.post('/api/questions/:questionId/feedback', authMiddleware, async (req, res) => {
   const { feedback } = req.body;
   const { questionId } = req.params;
 
@@ -208,7 +219,7 @@ app.post('/api/questions/:questionId/feedback', authenticate, async (req, res) =
 });
 
 
-app.put('/api/users/:userId/profile', authenticate, async (req, res) => {
+app.put('/api/users/:userId/profile', authMiddleware, async (req, res) => {
   const { userId } = req.params;
   const { username, email } = req.body;
 

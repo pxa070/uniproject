@@ -1,5 +1,5 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../database');
+const { DataTypes } = require('sequelize');
+const {sequelize} = require('../database');
 
 const Question = sequelize.define('Question', {
     question_id: {
@@ -21,7 +21,7 @@ const Question = sequelize.define('Question', {
     },
     created_at: {
         type: DataTypes.DATE,
-        defaultValue: Sequelize.NOW,
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
         allowNull: false
     },
     tags: {

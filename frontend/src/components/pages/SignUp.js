@@ -5,6 +5,7 @@ import axios from 'axios';
 import {useAuth} from "../context/AuthContext";
 
 
+
 function SignUp() {
     const navigate = useNavigate();
     const {login} = useAuth();

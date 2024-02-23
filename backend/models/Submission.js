@@ -1,5 +1,5 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../database'); // Using your database connection
+const { DataTypes } = require('sequelize');
+const {sequelize} = require('../database');
 const Question = require('./Question'); // Import the Question model assuming a relationship
 
 const Submission = sequelize.define('Submission', {
@@ -27,7 +27,7 @@ const Submission = sequelize.define('Submission', {
     },
     createdAt: { // Useful but optional
         type: DataTypes.DATE,
-        defaultValue: Sequelize.NOW
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     }
 });
 

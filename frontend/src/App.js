@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect, useState} from 'react';
 import Navbar from './components/common/navbar';
 import './App.css';
 import Home from './components/pages/HomePage';
@@ -10,28 +10,59 @@ import Footer from "./components/common/footer";
 import './axiosConfig';
 import Profile from "./components/pages/Profile";
 import UploadQuestion from "./components/pages/UploadQuestion";
-
-
+import axios from 'axios'
+import { useAuth } from './components/context/AuthContext';
+import ProtectedRoute from './components/HOC/ProtectedRoute';
+import QuestionList from './components/pages/QuestionList';
+import QuestionView from './components/pages/QuestionView';
 function App() {
+    const [isLoading,setIsLoading] = useState(true)
+    const { setUser,logout } = useAuth();
+    const getUser = async () => {
+        try {
+            const { data } = await axios.get('api/getMe');
+            setUser(data.user)
+
+        }
+        catch(err) {
+            logout()
+        }
+        finally {
+            setIsLoading(false)
+        }
+    }
+    useEffect(()=>{
+        if(localStorage.getItem("token")){
+            getUser()
+        }
+        else {
+            setIsLoading(false)
+        }
+    },[])
     return (
-        <Router>
+        <>
+            {
+                isLoading ?  <> </> :
+                    <Router>
 
-            <Navbar/>
-            <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/subjectareas' element={<SubjectAreas />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/sign-up' element={<SignUp />} />
-                <Route path='/Profile' element={<Profile />} />
-                <Route path='/UploadQuestion' element={<UploadQuestion />}/>
-            </Routes>
+                        <Navbar />
+                        <Routes>
+                            <Route path='/' element={<Home />} />
+                            <Route path='/subjectareas' element={<SubjectAreas />} />
+                            <Route path='/login' element={<Login />} />
+                            <Route path='/sign-up' element={<SignUp />} />
+                            <Route path='/Profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+                            <Route path='/UploadQuestion' element={<ProtectedRoute><UploadQuestion /></ProtectedRoute>}/>
+                            <Route path='/question/list' element={<ProtectedRoute><QuestionList/></ProtectedRoute>}/>
+                            <Route path="/question/:id" element={<ProtectedRoute><QuestionView/></ProtectedRoute>}/>
+                        </Routes>
 
-                <Footer />
+                        <Footer />
 
-        </Router>
+                    </Router>
+            }
+        </>
 
     );
 }
-
-
 export default App;

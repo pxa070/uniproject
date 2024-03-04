@@ -1,10 +1,13 @@
 const jwt = require('jsonwebtoken');
 
 const authMiddleware = (req, res, next) => {
-    const token = req.header('Authorization').replace('Bearer ', ''); // Assuming  JWT auth
-    if (!token) {
+
+    const header = req.header('Authorization');
+    if (!header) {
         return res.status(401).json({ message: 'Authentication required' });
     }
+    const token = header.replace('Bearer ', '');
+
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);

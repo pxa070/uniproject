@@ -4,10 +4,10 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 // Create the context with a default value
 export const AuthContext = createContext({
     isLoggedIn: false,
-    userId: null, // Added userId state
+    user: null, // Added user state
     login: () => {},
     logout: () => {},
-    setUserId: () => {} // Added setUserId function
+    setUser: () => {} // Added setUser function
 });
 
 // Custom hook for easy context consumption
@@ -16,10 +16,7 @@ export const useAuth = () => useContext(AuthContext);
 // Define the provider component that will wrap your app or component tree
 export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userId] = useState(null); // Declare with 'useState' hook
-    const setUserId = (id) => {
-        setUserId(id);
-    };
+    const [user, setUser] = useState(null); // Declare with 'useState' hook
     useEffect(() => {
         // Check for token presence in localStorage on initial load
         const token = localStorage.getItem('token');
@@ -29,25 +26,27 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     // Login function updates isLoggedIn state and stores token
-    const login = (token) => {
+    const login = (token,user) => {
         localStorage.setItem('token', token);
-        // Assuming API response structure is { token, userId }, extract here if so
-        const userId = token.userId; // Or wherever appropriate to get userId
+        // Assuming API response structure is { token, user }, extract here if so
+        // Or wherever appropriate to get user
+        console.log(user,"user in login")
         setIsLoggedIn(true);
-        setUserId(userId);
+        setUser(user);
     };
 
     // Logout function clears token and updates state
     const logout = () => {
         localStorage.removeItem('token'); // Clear saved token
         setIsLoggedIn(false);
+        setUser(null)
     };
 
 
 
     // The value prop of the provider provides state and functions to consuming components
     return (
-        <AuthContext.Provider value={{ isLoggedIn, login, logout, userId, setUserId}}>
+        <AuthContext.Provider value={{ isLoggedIn, login, logout, user, setUser}}>
             {children}
         </AuthContext.Provider>
     );

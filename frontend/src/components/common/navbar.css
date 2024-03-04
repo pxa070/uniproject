@@ -1,4 +1,7 @@
-
+.nav-item .nav-links.active {
+    font-weight: bold;
+    /* Add any other styles for active state here */
+}
 
 /* navbar.css */
 .navbar-logo img {
@@ -55,8 +58,8 @@
 
 .nav-menu {
     display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-gap: 10px;
+    grid-template-columns: repeat(5, auto);
+    grid-gap: 5px;
     list-style: none;
     text-align: center;
     width: 60vw;

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './navbar.css';
 import { useAuth } from "../context/AuthContext";
 
-function Navbar() {
+function Navbar(activeItem) {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
     const { isLoggedIn, logout } = useAuth();
@@ -31,7 +31,7 @@ function Navbar() {
         <>
             <nav className='navbar'>
                 <div className='navbar-container'>
-                    <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+                    <Link to='/' className='navbar-logo' onClick={closeMobileMenu}  >
                         <img src="/studyhub.png" alt="StudyHub" style={{ marginRight: '10px', height: '50px' }} />
                         StudyHub <i className='fab fa-typo3' />
                     </Link>
@@ -40,28 +40,29 @@ function Navbar() {
                     </div>
                     <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                         <li className='nav-item'>
-                            <Link to='/' className='nav-links' onClick={closeMobileMenu}>Home</Link>
+                            <Link to='/' className={`nav-links ${activeItem === 'home' ? 'active' : ''}`} onClick={closeMobileMenu}>Home</Link>
                         </li>
-                        <li className='nav-item'>
-                            <Link to='/subjectareas' className='nav-links' onClick={closeMobileMenu}>Subject Area</Link>
-                        </li>
+
                         {!isLoggedIn && (
                             <>
                                 <li className='nav-item'>
-                                    <Link to='/login' className='nav-links' onClick={closeMobileMenu}>Login</Link>
+                                    <Link to='/question/list' className='nav-links' onClick={closeMobileMenu}>My Questions</Link>
+                                </li>
+                                <li className='nav-item'>
+                                    <Link to='/login' className={`nav-links ${activeItem === 'login' ? 'active' : ''}`} onClick={closeMobileMenu}>Login</Link>
                                 </li>
                                 <li>
-                                    <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>Sign Up</Link>
+                                    <Link to='/sign-up' className={`nav-links ${activeItem === 'sign-up' ? 'active' : ''}`} onClick={closeMobileMenu}>Sign Up</Link>
                                 </li>
                             </>
                         )}
                         {isLoggedIn && (
                             <>
                                 <li className='nav-item'>
-                                    <Link to='/Profile' className='nav-links' onClick={closeMobileMenu}>Profile</Link>
+                                    <Link to='/Profile' className={`nav-links ${activeItem === 'Profile' ? 'active' : ''}`} onClick={closeMobileMenu}>Profile</Link>
                                 </li>
                                 <li className='nav-item'>
-                                    <Link to='/Settings' className='nav-links' onClick={closeMobileMenu}>Settings</Link>
+                                    <Link to='/Settings' className={`nav-links ${activeItem === 'Settings' ? 'active' : ''}`} onClick={closeMobileMenu}>Settings</Link>
                                 </li>
                                 <li>
                                     <button className='nav-links-mobile' onClick={logout}>Logout</button>
@@ -166,4 +167,4 @@ function Navbar() {
 
 export default Navbar;
 
-*/;
+*/

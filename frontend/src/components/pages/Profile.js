@@ -1,142 +1,112 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
-import './Profile.css'
+import './Profile.css';
 
-function Profile() {
-    const { user } = useContext(AuthContext); // Assuming your AuthContext provides the logged in user's data
-    const [profile, setProfile] = useState({});
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
-
-
-    useEffect(() => {
-        const fetchProfile = async () => {
-            setIsLoading(true);
-            try {
-                const response = await axios.get(`/api/users/${user.userId}`, {
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
-                setProfile(response.data);
-            } catch (error) {
-                console.error('Error fetching profile:', error);
-                setError(error.message);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        if (user && user.userId) { // Ensure userId is available
-            fetchProfile();
-        }
-    }, [user]);
-
-    // While loading/error
-    if (isLoading) return <div>Loading profile...</div>;
-    if (error) return <div>Error: {error}</div>;
-
-
-
-    return (
-        <div className="profile-container">
-            <div className="profile-header">
-                {/* Profile Image */}
-                <div className="profile-image-container">
-                    <img src="/profile%20picture.jpeg" alt="Profile" />
-                </div>
-                {/* Profile Details */}
-                <div className="profile-details">
-                    <div>
-                        <label htmlFor="username">Username: </label>
-                        <input
-                            type="text"
-                            id="username"
-                            value={profile.username}
-                            onChange={(e) => setProfile({ ...profile, username: e.target.value })}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="email">Email: </label>
-                        <input
-                            type="email"
-                            id="email"
-                            value={profile.email}
-                            onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                        />
-                    </div>
-                    {/* Add more form fields as needed */}
-                </div>
-            </div>
-            {/* Add other sections as needed */}
-        </div>
-    );
-}
-
-export default Profile;
-
-/*
-
-import React, { useState, useContext, useEffect } from 'react';
-import { AuthContext } from '../context/AuthContext';
-import axios from 'axios';
-import './Profile.css'
 function Profile() {
     const { user } = useContext(AuthContext);
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
+    const [isUpdating, setIsUpdating] = useState(false);
+    const [profile, setProfile] = useState({ username: "", email: "", profile: "http://www.gravatar.com/avatar/9017a5f22556ae0eb7fb0710711ec125?s=128" });
+    const [file, setFile] = useState(null);
 
     useEffect(() => {
+        console.log(user.image_url ? `http://localhost:3001/${user.image_url}`: profile.profile, ' user here')
         if (user) {
-            setUsername(user.username);
-            setEmail(user.email);
+            setProfile({ username: user.username, email: user.email, profile: user.image_url ? `http://localhost:3001/${user.image_url}`: profile.profile });
         }
     }, [user]);
 
+    useEffect(() => {
+        return () => {
+            if (profile.profile.startsWith('blob:')) {
+                URL.revokeObjectURL(profile.profile);
+            }
+        };
+    }, [profile.profile]);
 
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const objectUrl = URL.createObjectURL(file);
+            setProfile(prev => ({ ...prev, profile: objectUrl }));
+            setFile(file);
+        }
+    };
 
-    const handleUpdate = async () => {
-        try {
-            // Assuming you have an endpoint to update user settings
-            const response = await axios.put(`/api/users/${user.userId}/profile`, {
-                username,
-                email
-            });
-            setMessage(response.data.message);
-        } catch (error) {
-            setMessage('Failed to update settings. Please try again.');
-            console.error('Error updating settings:', error);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (isUpdating) {
+            const formData = new FormData();
+            formData.append('username', profile.username);
+            formData.append('email', profile.email);
+            if (file) {
+                formData.append('profileImage', file);
+            }
+
+            try {
+                const response = await axios.put('/api/users', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+                setIsUpdating(false);
+            } catch (error) {
+                console.error(error);
+            }
         }
     };
 
     return (
-        <div className="profile-container">
-            <h1>Profile</h1>
-            {message && <p>{message}</p>}
-            <div className="form-group">
-                <label htmlFor="username">Username:</label>
-                <input
-                    type="text"
-                    id="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
+        <div className='loginPage'>
+            <div className="login-container">
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <h2 className='formHeader'>Profile</h2>
+                    <img className="circle" height="128" width="128" src={profile.profile} alt="Profile" />
+                    <div className="input-group">
+                        <label>User Name</label>
+                        <input
+                            placeholder='Enter User Name'
+                            type="text"
+                            disabled={!isUpdating}
+                            value={profile.username}
+                            required
+                            onChange={(e) => setProfile((prev) => ({ ...prev, username: e.target.value }))}
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label>Email</label>
+                        <input
+                            placeholder='Enter Email'
+                            type="email"
+                            disabled={!isUpdating}
+                            value={profile.email}
+                            required
+                            onChange={(e) => setProfile((prev) => ({ ...prev, email: e.target.value }))}
+                        />
+                    </div>
+                    {isUpdating && (
+                        <div className="input-group">
+                            <label>Profile Picture</label>
+                            <input
+                                type="file"
+                                onChange={handleFileChange}
+                            />
+                        </div>
+                    )}
+                    {!isUpdating && <button type="button" className="login-button" onClick={() => setIsUpdating(true)}>Update</button>}
+                    {isUpdating && (
+                        <div>
+                            <button type="button" className="login-button cancel-button" onClick={() => {
+                                setIsUpdating(false);
+                                setProfile({ username: user.username, email: user.email, profile: user.image_url || "http://www.gravatar.com/avatar/9017a5f22556ae0eb7fb0710711ec125?s=128" });
+                            }}>Cancel</button>
+                            <button type="submit" className='login-button'>Save</button>
+                        </div>
+                    )}
+                </form>
             </div>
-            <div className="form-group">
-                <label htmlFor="email">Email:</label>
-                <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-            <button onClick={handleUpdate}>Update Profile</button>
         </div>
     );
 }
 
-export default Profile;
-*/;
+export default Profile

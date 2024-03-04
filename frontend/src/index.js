@@ -6,11 +6,11 @@ import App from './App';
 import { AuthProvider } from './components/context/AuthContext'; // Correct relative import
 import 'axios';
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
     <React.StrictMode>
         <AuthProvider>
             <App />
         </AuthProvider>
-    </React.StrictMode>,
-    document.getElementById('root')
+    </React.StrictMode>
 );

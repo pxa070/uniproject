@@ -4,45 +4,30 @@ import '../pages/UploadQuestion.css';
 
 function QuestionForm() {
     const [questionText, setQuestionText] = useState('');
-    const [resources, setResources] = useState('');
-    const [modelAnswer, setModelAnswer] = useState('');
-    const [tags, setTags] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post('/api/questions', { questionText, resources, modelAnswer, tags });
+            const { data } = await axios.post('/api/questions', { questionText });
             console.log('Question submitted:', data);
             // Reset form or redirect as needed
             setQuestionText('');
-            setResources('');
-            setModelAnswer('');
-            setTags('');
         } catch (error) {
             console.error('Error submitting question:', error);
         }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Question:</label>
-                <textarea value={questionText} onChange={e => setQuestionText(e.target.value)} />
-            </div>
-            <div>
-                <label>Resources:</label>
-                <input type="text" value={resources} onChange={e => setResources(e.target.value)} />
-            </div>
-            <div>
-                <label>Model Answer:</label>
-                <textarea value={modelAnswer} onChange={e => setModelAnswer(e.target.value)} />
-            </div>
-            <div>
-                <label>Tags:</label>
-                <input type="text" value={tags} onChange={e => setTags(e.target.value)} />
-            </div>
-            <button type="submit">Submit Question</button>
-        </form>
+        <div className='QuestionPage'>
+            <form onSubmit={handleSubmit} className='QuestionForm'>
+                <textarea className='textArea' placeholder='Ask Anything.....' value={questionText} onChange={e => setQuestionText(e.target.value)} />
+
+                <div className='actions'>
+                    <button className='reset' onClick={()=>setQuestionText('')}>Reset</button>
+                    <button className='submit' type="submit">Submit Question</button>
+                </div>
+            </form>
+        </div>
     );
 }
 

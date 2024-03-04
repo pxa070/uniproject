@@ -1,253 +1,280 @@
-const { Pool } = require('pg'); // PostgreSQL client
-const sequelize = require('./database');// If you're using Sequelize
-require('dotenv').config(); // Loads environment variables from .env file
-const express = require('express');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const validator = require('validator');
-const cors = require('cors');
-const analyzeQuestion = require('./models/analyser');
-const fetchResources = require('./models/search');
-const authMiddleware = require('./middleware/auth')
-
-
-
+require("dotenv").config(); // Loads environment variables from .env file
+const express = require("express");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const validator = require("validator");
+const cors = require("cors");
+const analyzeQuestion = require("./utils/analyser");
+const fetchResources = require("./utils/search");
+const authMiddleware = require("./middleware/auth");
+const upload = require('./utils/uploadConfig');
+const db = require("./models");
+const { answer_assistant, compare_correctness } = require("./utils/llm");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-
 // Middleware
 app.use(cors()); // Enable CORS
 app.use(express.json()); // Parse JSON bodies
+console.log(path.resolve(__dirname, './', 'public'), ' path here')
+app.use(express.static(path.resolve(__dirname, './', 'public')));
 
-
-// Database connection pool
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
-});
-
-/*
- function authenticate(req, res, next) {
+app.get("/api/questions", authMiddleware, async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(' ')[1]; // Updated and optional chaining
-    if (!token) return res.status(401).send({ message: 'Missing authorization token' });
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.userId = decoded.userId;
-    next();
-  } catch (error) {
-    res.status(401).send({ message: 'Authentication failed' });
-  }
-} */
-// User registration endpoint
-
-// Import your Question model here
-const Question = require('./models/Question'); // Adjust your model's path
-
-app.get('/api/questions', async (req, res) => {
-  try {
-    // Implement search (by filtering by query parameters) and result logic as needed
-    let questions = await Question.findAll();
+    const pageNumber = parseInt(req.query.page) || 0;
+    let questions = await db.Question.findAll({
+      limit: 10,
+      offset: pageNumber * 10,
+    });
 
     // You might want to return only certain fields as needed; adjust accordingly
     res.json(questions);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error fetching questions' });
+    res.status(500).json({ message: "Error fetching questions" });
   }
 });
 
-app.post('/api/questions', async (req, res) => {
+app.get("/api/questions/:question_id", async (req, res) => {
+  console.log(req.params ,"arams")
   try {
-    const { questionText, resourceLinks, modelAnswer, subjectId, topicId, difficultyLevel /* other info */ } = req.body;
+    let question = await db.Question.findOne({
+      where :
+          {question_id: req.params.question_id}
+    });
+
+    res.json(question);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error fetching questions" });
+  }
+});
+app.post(
+    "/api/question/:question_id/answer",
+    authMiddleware,
+    async (req, res) => {
+      try {
+        let question = await db.Question.findOne({
+          question_id: req.params.question_id,
+        });
+        const similarity_index = await compare_correctness(
+            question.question_text,
+            question.model_answer_explanation,
+            req.body.answer,
+        );
+        const regex = /(\d\.\d+)/;
+        const match = similarity_index.match(regex);
+        if (!match) {
+          return res.status(404).json({ message: "Please try again" });
+        }
+
+        return res.status(200).json({ similarity_index: match[1] });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error fetching questions" });
+      }
+    },
+);
+app.post("/api/questions", authMiddleware, async (req, res) => {
+  try {
+    const {
+      questionText,
+      resourceLinks,
+      modelAnswer,
+      subjectId,
+      topicId,
+      difficultyLevel /* other info */,
+    } = req.body;
     const analysisResult = analyzeQuestion(questionText);
-    const resources = await fetchResources(analysisResult.keywords);
-    const newQuestion = await Question.create({
+    const resources = await fetchResources(questionText);
+    const model_answer_explanation = await answer_assistant(questionText);
+
+    const newQuestion = await db.Question.create({
       question_text: questionText,
       resource_links: resourceLinks,
+      user_id: req.userId,
       model_answer: modelAnswer,
+      resources: resources,
       subject_id: subjectId,
       topic_id: topicId,
       difficulty_level: difficultyLevel,
       keywords: analysisResult.keywords,
-      potentialTopic: analysisResult.topic
+      potentialTopic: analysisResult.topic,
+      model_answer_explanation: model_answer_explanation,
     });
 
     res.status(201).json(newQuestion);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error creating question' });
+    res.status(500).json({ message: "Error creating question" });
   }
 });
-
-
-
-// Import Submission model (create this if not already defined)
-const Submission = require('./models/Submission');
-
-app.post('/api/questions/:questionId/submissions', async (req, res) => {
+app.post("/api/questions/:questionId/submissions", async (req, res) => {
   try {
     const { questionId } = req.params;
     const { studentId, studentAnswer } = req.body; // Assuming you provide student identification
-
-    const newSubmission = await Submission.create({
+    const newSubmission = await db.Submission.create({
       question_id: questionId,
       student_id: studentId,
-      student_answer: studentAnswer
+      student_answer: studentAnswer,
     });
-
     res.status(201).json(newSubmission);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error submitting answer' });
+    res.status(500).json({ message: "Error submitting answer" });
   }
 });
-
-
-
-
-app.get('/api/', (req, res) => {
-  res.send('Hello World!');
+app.get("/api/", (req, res) => {
+  res.send("Hello World!");
 });
-
 // GET /api/users/:userId - Fetch user details
-app.get('/api/users/:userId', authMiddleware, async (req, res) => {
+app.get("/api/users/:userId", authMiddleware, async (req, res) => {
   const { userId } = req.params;
-
   try {
-    const result = await pool.query('SELECT user_id, username, email FROM users WHERE user_id = $1', [userId]);
-
-    if (result.rows.length > 0) {
-      res.json(result.rows[0]);
+    const user = await await db.User.findOne({
+      where: {
+        id: userId,
+      },
+    });
+    if (user) {
+      res.json(user);
     } else {
-      res.status(404).send({ message: 'User not found' });
+      res.status(404).send({ message: "User not found" });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: 'Server error fetching user' });
+    res.status(500).send({ message: "Server error fetching user" });
   }
 });
 
 // Simplified JWT payload for the example
 function generateToken(userId) {
-  return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "24h" });
 }
 
-
-app.post('/api/signup', async (req, res) => {
+app.post("/api/signup", async (req, res) => {
   const { username, email, password } = req.body;
-
   // Validate email format
-  // if (!validator.isEmail(email)) {
-   //  return res.status(400).send({ message: 'Invalid email format' });
-     // }
-
-  // Hash password
+  if (!validator.isEmail(email)) {
+    return res.status(400).send({ message: "Invalid email format" });
+  }
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const result = await pool.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id', [username, email, hashedPassword]);
-    const token = generateToken(result.rows[0].id); // Generate JWT token after successful registration
+    const newUser = await db.User.create({
+      username: username,
+      email: email,
+      password: hashedPassword, // Assuming you've already hashed the password
+    });
+    const token = generateToken(newUser.id); // Generate JWT token after successful registration
     res.status(201).json({ token });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server error during registration');
+    res.status(500).send("Server error during registration");
   }
 });
-
-// Include your routes for questions, submissions, and user details here
-
-// Authentication middleware now uses simplified JWT token handling
-app.use(authMiddleware);
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
-
-
-
 // User login endpoint
-app.post('/api/login', async (req, res) => {
-  const { username, password } = req.body;
-
+app.get("/api/getMe", authMiddleware, async (req, res) => {
   try {
-    // Retrieve user from database
-    const result = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
-
-    if (result.rows.length > 0) {
-      const user = result.rows[0];
+    const { userId } = req;
+    const user = await db.User.findOne({
+      where: {
+        id: userId,
+      },
+    });
+    if (!user) {
+      res.status(400).send({ message: "User does not exists" });
+    }
+    res.status(200).send({user});
+  } catch (err) {
+    console.error(error);
+    res.status(500).send({ message: "Server error during get ME" });
+  }
+});
+app.post("/api/login", async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const user = await db.User.findOne({
+      where: {
+        username: username,
+      },
+    });
+    if (user) {
       // Compare hashed password
       const match = await bcrypt.compare(password, user.password);
-
       if (match) {
         // Generate JWT token
-        const token = jwt.sign({ userId: user.user_id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token: token, userId: user.user_id });
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
+          expiresIn: "24h",
+        });
+        res.json({ token: token, user });
       } else {
-        res.status(400).send({ message: 'Invalid credentials' });
+        res.status(400).send({ message: "Invalid credentials" });
       }
     } else {
-      res.status(404).send({ message: 'User not found' });
+      res.status(404).send({ message: "User not found" });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: 'Server error during login' });
+    res.status(500).send({ message: "Server error during login" });
   }
 });
-
 // Authentication middleware (this is a simplified example, you should implement actual token verification)
-
-
-app.post('/api/questions/:questionId/feedback', authMiddleware, async (req, res) => {
-  const { feedback } = req.body;
-  const { questionId } = req.params;
-
-  try {
-    const result = await pool.query(
-        'INSERT INTO question_feedback (question_id, feedback) VALUES ($1, $2) RETURNING *',
-        [questionId, feedback]
-    );
-    res.status(201).json(result.rows[0]);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send({ message: 'Server error when submitting feedback' });
-  }
-});
-
-
-app.put('/api/users/:userId/profile', authMiddleware, async (req, res) => {
-  const { userId } = req.params;
+app.post(
+    "/api/questions/:questionId/feedback",
+    authMiddleware,
+    async (req, res) => {
+      const { feedback } = req.body;
+      const { questionId } = req.params;
+      try {
+        const newFeedback = await db.QuestionFeedback.create({
+          questionId: questionId,
+          feedback: feedback,
+        });
+        res.status(201).json(newFeedback);
+      } catch (error) {
+        console.error(error);
+        res
+            .status(500)
+            .send({ message: "Server error when submitting feedback" });
+      }
+    },
+);
+app.put("/api/users", authMiddleware, upload, async (req, res) => {
   const { username, email } = req.body;
-
-  // Validate input
   if (!validator.isEmail(email)) {
-    return res.status(400).send({ message: 'Invalid email format' });
+    return res.status(400).send({ message: "Invalid email format" });
+  } else if (!username) {
+    return res.status(400).send({ message: "Username required" });
   }
-
   try {
-    // Update user settings in the database
-    const result = await pool.query(
-        'UPDATE users SET username = $1, email = $2 WHERE user_id = $3 RETURNING username, email',
-        [username, email, userId]
-    );
-
-    if (result.rows.length > 0) {
-      // Return updated user settings
-      res.json(result.rows[0]);
-    } else {
-      // No rows updated, user not found
-      res.status(404).send({ message: 'User not found' });
+    const toUpdate = {
+      username: username,
+      email: email,
+    };
+    if(req.file){
+      toUpdate.image_url = req.file.path.split('public/')[1]
     }
+    await db.User.update(
+        toUpdate,
+        {
+          where: {
+            id: req.userId,
+          },
+        },
+    );
+    const updatedUser = await db.User.findOne({
+      where: {
+        id: req.userId,
+      },
+      attributes: ["username", "email", "image_url"],
+    });
+    return res.status(200).json(updatedUser);
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: 'Server error when updating settings' });
+    res.status(500).send({ message: "Server error when updating settings" });
   }
 });
-
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

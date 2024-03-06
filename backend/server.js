@@ -48,7 +48,7 @@ app.get("/api/questions", authMiddleware, async (req, res) => {
           [Op.not]: ''
         },
       },
-      limit: 10,
+      limit: 100,
       offset: pageNumber * 10,
     });
     res.json(questions);

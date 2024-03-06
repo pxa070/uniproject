@@ -66,7 +66,7 @@ function Profile() {
         <div className='loginPage'>
             <div className="login-container">
                 <form className="login-form" onSubmit={handleSubmit}>
-                    <h2 className='formHeader'>Profile</h2>
+                    <h2 className='formHeader'><center>Profile</center></h2>
                     <img className="circle" height="128" width="128" src={profile.profile} alt="Profile" />
                     <div className="input-group">
                         <label>User Name</label>

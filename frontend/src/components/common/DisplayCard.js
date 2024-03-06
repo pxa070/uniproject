@@ -8,7 +8,6 @@ const DisplayCard = ({index,question,id}) => {
             <div className="face face1">
                 <div className="content">
                     <span className="stars"></span>
-                    <h2 className="java">Question</h2>
                     <p className="java">{question}</p>
                 </div>
             </div>

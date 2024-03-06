@@ -40,12 +40,13 @@
     font-weight: 700!important;
     height: auto!important;
     outline: none!important;
-    background: #5c67ec!important;
+    background: #40e0d0!important;
     width: 143px;
 }
+
 .login-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px; /* Increased spacing */
+    color: #333; /* Darker text for contrast */
 }
 
 .input-group {
@@ -74,7 +75,7 @@
     height: auto!important;
     outline: none!important;
     width: 143px;
-    background-color: #5c67ec !important;
+    background-color: #40e0d0 !important;
     color: white;
     font-size: 16px;
     cursor: pointer;
@@ -82,14 +83,14 @@
 }
 
 .login-button:hover {
-    background-color: #4a54d1;
+    background-color: #40e0d0;
 }
 .signup-link {
     margin-top: 15px;
     text-align: center;
 }
 .signup-link a {
-    color: #5c67ec;
+    color: #40e0d0;
     text-decoration: none; /* Optional: removes underline */
 }
 .signup-link a:hover {

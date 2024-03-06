@@ -13,6 +13,7 @@ const QuestionView = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [answer, setAnswer] = useState("")
+    const [error,setError] = useState('')
     const [similartyIndex, setSimilartyIndex] = useState({
         value: 0,
         show: false
@@ -31,20 +32,25 @@ const QuestionView = () => {
     }
 
     const postAnswer = async () => {
-        try {
-            setIsSubmitting(true)
-            const { data } = await axios.post(`api/question/${id}/answer`, { answer })
-            setSimilartyIndex({
-                show: true,
-                value: Number(data.similarity_index)
-            })
+        if(answer) {
+            try {
+                setError('')
+
+                setIsSubmitting(true)
+                const {data} = await axios.post(`api/question/${id}/answer`, {answer})
+                setSimilartyIndex({
+                    show: true,
+                    value: Number(data.similarity_index)
+                })
+            } catch (err) {
+                console.log(err)
+            } finally {
+                setIsSubmitting(false)
+            }
         }
-        catch (err) {
-            console.log(err)
-        }
-        finally {
-            setIsSubmitting(false)
-        }
+        else {
+                setError("Enter A Valid Answer")
+            }
     }
     useEffect(() => {
         fetchQuestion()
@@ -52,7 +58,16 @@ const QuestionView = () => {
 
     return (
         <div className='QuestionView'>
-            <h2 style={{ marginBottom: "30px" }}>Question View</h2>
+            <p style={{
+                marginBottom: "10px",
+                fontSize: "24px",
+                fontWeight: "bold",
+                color: "#333",
+                textAlign: "center",
+                padding: "15px",
+                borderRadius: "8px",
+                boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+            }}>Question View</p>
             {
                 isFetching ? <p>Loading...</p> :
                     <>
@@ -65,7 +80,16 @@ const QuestionView = () => {
                                 enableOverlay={true}
                             >
                                 <>
-                                    <h2 style={{ marginBottom: "20px" }}>Resources</h2>
+                                    <p style={{
+                                        marginBottom: "10px",
+                                        fontSize: "24px",
+                                        fontWeight: "bold",
+                                        color: "#333",
+                                        textAlign: "center",
+                                        padding: "15px",
+                                        borderRadius: "8px",
+                                        boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+                                    }}>Resources</p>
                                     {
                                         question?.resources?.map((item, index) => (
                                             <a onClick={() => {
@@ -75,6 +99,7 @@ const QuestionView = () => {
                                     }
                                 </>
                             </Drawer>
+                            {error && <p style={{color : "red"}}>{error}</p>}
                             <div className='pageContainer'>
                                 <div className='ViewContainer'>
                                     <p className='questionText'>{question.question_text}</p>

@@ -45,7 +45,7 @@
     font-weight: 700!important;
     height: auto!important;
     outline: none!important;
-    background: #5c67ec!important;
+
     width: 143px;
 }
 .form-group {
@@ -74,7 +74,7 @@
     height: auto!important;
     outline: none!important;
     width: 143px;
-    background-color: #5c67ec !important;
+    background-color: #40e0d0 !important;
     color: white;
     font-size: 16px;
     cursor: pointer;

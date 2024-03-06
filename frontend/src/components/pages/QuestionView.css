@@ -1,114 +1,128 @@
+/* Base setup for the QuestionView, focusing on central alignment and spacing */
 .QuestionView {
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 60vh;
     margin-top: 60px;
-}
-.modernDrawer {
-    padding: 10px;
-    padding-top: 20px;
-    width: 450px !important;
-    overflow: auto;
+    font-family: 'Arial', sans-serif; /* Ensuring a clean, modern font is used */
+    color: #333; /* Dark gray for text for better readability */
 }
 
+/* Drawer styling with smoother overflow and modern aesthetic */
+.modernDrawer {
+    padding: 20px;
+    width: 450px; /* Removed !important for cleaner CSS */
+    overflow: auto;
+    background-color: #f9f9f9; /* Light background for the drawer */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adding a subtle shadow for depth */
+    border-radius: 8px; /* Rounded corners */
+}
+
+/* Styling for links within the drawer, enhancing interactivity */
 .modernDrawer a {
     margin-bottom: 20px;
     display: inline-block;
     cursor: pointer;
     padding-bottom: 5px;
-    border-bottom: 2px solid #40e0d0;
+    border-bottom: 2px solid #40e0d0; /* Turquoise accent for a pop of color */
+    color: #333; /* Ensuring text color is consistent */
+    text-decoration: none; /* Removing underline from links */
 }
 
-
+/* Main container for the view, focusing on padding and spacing for readability */
 .ViewContainer {
-    margin-top: 30px;
+    margin: 30px auto; /* Centering the container with automatic horizontal margins */
     align-items: center;
     background: #fff;
-    border: 1px solid rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.1); /* Softer border for a lighter look */
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 69px 44px 27px;
+    padding: 40px; /* Updated padding for consistency */
     position: relative;
     width: 60%;
-    margin-right: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Adding a shadow for depth */
 }
+
+/* Styling the header within the form for better visibility and aesthetic */
 .ViewContainer .formHeader {
-    left: 40%;
     position: absolute;
-    right: 0;
-    top: -33px;
-    font-size: 24px!important;
-    padding: 12px 10px!important;
-    border: none!important;
-    border-radius: 5px!important;
-    text-align: center;
-    color: #fff!important;
-    font-weight: 700!important;
-    height: auto!important;
-    outline: none!important;
-    background: #5c67ec!important;
-    width: fit-content;
+    top: -20px; /* Adjusting position for a snug fit */
+    left: 50%;
+    transform: translateX(-50%); /* Centering the header */
+    font-size: 18px; /* Adjusting font size for balance */
+    padding: 8px 16px; /* Adjusting padding for a neater appearance */
+    background: #5c67ec; /* Keeping the vibrant header color */
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
 }
+
+/* Enhancing the appearance of the login form and input groups */
 .login-form h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px; /* Increased margin for better spacing */
+    color: #333; /* Consistent text color */
 }
 
 .input-group {
     position: relative;
-    margin-bottom: 15px;
-    width: 100%;
+    margin-bottom: 20px; /* Increased margin for better spacing */
 }
 
 .input-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 10px; /* Increased for clarity */
 }
 
-.input-group textarea {
+.input-group textarea, .input-group input {
     width: 100%;
     padding: 12px;
     border-radius: 5px;
     margin-bottom: 16px;
-    border: 1px solid #dddddd;
+    border: 1px solid #cccccc; /* Lighter border color */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Inner shadow for depth */
 }
 
+/* Button enhancements for a more engaging interaction */
 .login-button {
-    border: none!important;
-    border-radius: 5px!important;
-    color: #fff!important;
-    font-weight: 700!important;
-    height: auto!important;
-    outline: none!important;
-    width: fit-content;
-    background-color: #5c67ec !important;
-    color: white;
+    padding: 12px 24px; /* Adjusted padding for better clickability */
+    background-color: #5c67ec;
+    color: #fff;
     font-size: 16px;
     cursor: pointer;
-    padding: 12px !important;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
 .login-button:hover {
-    background-color: #4a54d1;
+    background-color: #4a54d1; /* Darker shade on hover for feedback */
 }
+
+/* Additional styling for a cleaner layout and readability */
 .textbutton {
-    position:absolute;
-    bottom:20px;
-    right:1px;
+    position: absolute;
+    bottom: 20px;
+    right: 1px; /* Adjusted for consistency */
 }
+
 .questionText {
     width: 100%;
     text-align: left;
     font-size: 20px;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 0px; /* Increased for better separation */
 }
+
+/* Ensuring the page container aids in central alignment */
 .pageContainer {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 20px 0; /* Added margin for spacing */
 }

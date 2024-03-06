@@ -22,7 +22,19 @@ const QuestionList = () => {
     },[])
     return (
         <div className='QuestionListPage'>
-            <h2 style={{marginBottom : "10px"}}>My Questions</h2>
+            <p style={{
+                marginBottom: "10px",
+                fontSize: "24px",
+                fontWeight: "bold",
+                color: "#333",
+                textAlign: "center",
+                padding: "15px",
+                borderRadius: "8px",
+                boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+            }}>
+                My Questions
+            </p>
+
             {
                 isFetching ? <p>Loading....</p> :
                     questions.length

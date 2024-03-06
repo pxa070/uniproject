@@ -1,184 +1,85 @@
 /* QuestionForm.css */
 
 .QuestionPage {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 90px;
-    margin-bottom: 90px;
-    min-height: 60vh;
+    width: 60%; /* Adjust width as needed */
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
 .QuestionForm {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 660px;
 }
+
 .QuestionForm .textArea {
-    width: 100%;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #40e0d0;
-    font-size: 14px;
-}
-.QuestionForm .actions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-top: 10px;
-}
-.form-container {
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.form-group {
-    margin-bottom: 15px;
-}
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-.form-group input[type="text"],
-.form-group textarea {
-    width: 100%;
-    padding: 8px;
-    border-radius: 4px;
+    min-height: 150px;
+    padding: 15px;
+    margin-bottom: 20px;
     border: 1px solid #ddd;
-    resize: vertical;
-}
-.form-group textarea {
-    height: 100px;
-}
-
-button[type="submit"] {
-    border: none!important;
-    border-radius: 5px!important;
-    color: #fff!important;
-    font-weight: 700!important;
-    height: auto!important;
-    outline: none!important;
-    width: fit-content;
-    background-color: #5c67ec !important;
-    color: white;
+    border-radius: 5px;
     font-size: 16px;
-    cursor: pointer;
-    padding: 12px !important;
-}
-.reset {
-    border: 1px solid #5c67ec;
-    border-radius: 5px!important;
-    font-weight: 700!important;
-    height: auto!important;
-    outline: none!important;
-    width: 143px;
-    background-color: #fff !important;
-    color: #5c67ec;
-    margin-right: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 12px !important;
-
-}
-button[type="submit"]:hover {
-    background-color: #0056b3;
+    resize: vertical; /* Allow resizing vertically */
 }
 
-.ReactTags__tags {
-    position: relative;
-    margin-top: 10px;
+.QuestionForm .react-tags { /* Container for tags input */
+    margin-bottom: 20px;
 }
 
-.ReactTags__clearAll {
-    cursor: pointer;
-    padding: 10px;
-    margin: 10px;
-    background: #f88d8d;
+.actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.actions button {
+    padding: 10px 20px;
+    background-color: #40e0d0;
     color: #fff;
     border: none;
-}
-
-/* Styles for the input */
-.ReactTags__tagInput {
-    border-radius: 2px;
-    display: inline-block;
-    margin-bottom: 5px;
-}
-.ReactTags__tagInput input.ReactTags__tagInputField,
-.ReactTags__tagInput input.ReactTags__tagInputField:focus {
-    height: 31px;
-    margin: 0;
-    font-size: 12px;
-    border: 1px solid #eee;
-    min-width: 150px;
-}
-
-.ReactTags__editInput {
-    border-radius: 1px;
-}
-
-.ReactTags__editTagInput {
-    display: inline-flex;
-}
-
-/* Styles for selected tags */
-.ReactTags__selected span.ReactTags__tag {
-    border: 1px solid #ddd;
-    background: #63bcfd;
-    color: white;
-    font-size: 12px;
-    display: inline-block;
-    padding: 5px;
-    margin: 0 5px;
-    border-radius: 2px;
-}
-.ReactTags__selected a.ReactTags__remove {
-    color: #aaa;
-    margin-left: 5px;
+    border-radius: 5px;
     cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
 }
 
-/* Styles for suggestions */
-.ReactTags__suggestions {
-    position: absolute;
-}
-.ReactTags__suggestions ul {
-    list-style-type: none;
-    box-shadow: 0.05em 0.01em 0.5em rgba(0, 0, 0, 0.2);
-    background: white;
-    width: 200px;
-}
-.ReactTags__suggestions li {
-    border-bottom: 1px solid #ddd;
-    padding: 5px 10px;
-    margin: 0;
-}
-.ReactTags__suggestions li mark {
-    text-decoration: underline;
-    background: none;
-    font-weight: 600;
-}
-.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
-    background: #b7cfe0;
-    cursor: pointer;
+.actions button:hover {
+    background-color: #35c2b4; /* Slightly darker on hover */
 }
 
-.ReactTags__remove {
-    border: none;
-    cursor: pointer;
-    background: none;
-    color: white;
+.actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
-.ReactTags__error {
-    color: #e03131;
-    font-size: 16px;
-    font-weight: 500;
+.actions .reset {
+    background-color: #f0f0f0;
+    color: #666;
+}
+
+.actions .reset:hover {
+    background-color: #e0e0e0;
+}
+
+.sample-questions-container {
+    margin-top: 20px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.sample-questions-container button {
+    background-color: #f0f0f0;  /* Light gray background */
+    color: #333;               /* Darker text color */
+    border: none;              /* Remove default button border */
+    padding: 8px 15px;
+    margin: 5px;
+    border-radius: 5px;        /* Slightly rounded corners */
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Hover effect */
+}
+
+.sample-questions-container button:hover {
+    background-color: #e0e0e0;
 }

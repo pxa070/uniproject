@@ -27,13 +27,14 @@
 }
 
 .face.face1 {
-    background: #fff;
-    color: #40e0d0;
+    background: #40e0d0;
+    color: #fff;
     padding: 20px;
     transform: rotateY(0deg);
 }
 
 .face.face2 {
+    background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%);
     color: #fff;
     line-height: 1.5;
     padding: 30px;
@@ -43,9 +44,9 @@
 .face.face1 h2, .face.face2 h2 {
     font-weight: 300;
     letter-spacing: 2px;
-    transition: color 0.1s ease-in-out;
+    transition: color 0.3s ease-in-out;
 }
 
-.card:hover .face h2 {
-    color:  #40e0d0;
+.card:hover .face p {
+    color: black;
 }

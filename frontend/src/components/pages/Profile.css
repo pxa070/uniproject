@@ -40,8 +40,7 @@
     font-weight: 700!important;
     height: auto!important;
     outline: none!important;
-    background: #5c67ec!important;
-    width: 143px;
+    width: 164px;
 }
 .login-form h2 {
     text-align: center;
@@ -74,7 +73,6 @@
     height: auto!important;
     outline: none!important;
     width: 143px;
-    background-color: #5c67ec !important;
     color: white;
     font-size: 16px;
     cursor: pointer;
@@ -82,8 +80,8 @@
 }
 .cancel-button {
     background-color: #fff !important;
-    color: #5c67ec !important;
-    border: 1px solid #5c67ec !important;
+    color: #40e0d0 !important;
+    border: 1px solid #40e0d0 !important;
     margin-right: 5px !important;
 }
 .login-button:hover {

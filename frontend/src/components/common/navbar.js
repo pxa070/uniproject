@@ -44,14 +44,15 @@ function Navbar(activeItem) {
                         {isLoggedIn && (
                             <>
                                 <li className='nav-item'>
-                                <Link to='/UploadQuestion' className='nav-links' onClick={closeMobileMenu}>Upload A Question</Link>
-                            </li>
+                                    <Link to='/Profile' className={`nav-links ${activeItem === 'Profile' ? 'active' : ''}`} onClick={closeMobileMenu}>Profile</Link>
+                                </li>
                                 <li className='nav-item'>
                                     <Link to='/question/list' className='nav-links' onClick={closeMobileMenu}>My Questions</Link>
                                 </li>
                                 <li className='nav-item'>
-                                    <Link to='/Profile' className={`nav-links ${activeItem === 'Profile' ? 'active' : ''}`} onClick={closeMobileMenu}>Profile</Link>
+                                    <Link to='/UploadQuestion' className='nav-links' onClick={closeMobileMenu}>Upload Question</Link>
                                 </li>
+
                                 <li>
                                     <button className='nav-links-mobile' onClick={logout}>Logout</button>
                                 </li>

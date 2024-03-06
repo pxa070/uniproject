@@ -26,7 +26,7 @@ async function compare_correctness(question, model_answer, user_answer) {
             {
                 role: "system",
                 content:
-                    "Evaluate the correctness of the user's answer in comparison to the correct answer, taking into account the semantics and relevance to the question. Provide a semantic similarity score between the Correct Answer and the User Answer on a scale from 0 to 1, where 1 indicates complete semantic similarity and 0 indicates no similarity.",
+                    "Evaluate the correctness of the user's answer in comparison to the correct answer, taking into account the semantics and relevance to the question. Provide only a semantic similarity score between the Correct Answer and the User Answer on a scale from 0 to 1 with no explanation, where 1 indicates complete semantic similarity and 0 indicates no similarity.",
             },
             {
                 role: "user",

@@ -5,56 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f340bd07-4ac0-4449-aada-630b8644d5d9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/apiRoutes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/models/QuestionFeedback.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/models/QuestionTopic.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/models/Resource.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/models/Subject.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/models/Topic.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/models/User.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/models/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/utils/llm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/utils/uploadConfig.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/HOC/ProtectedRoute.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/common/DisplayCard.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/common/DisplayCard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/QuestionList.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/QuestionList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/QuestionView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/ForgotPassword.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/ForgotPassword.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/QuestionView.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/ResetPassword.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/middleware/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/middleware/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/Question.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/Question.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/Submission.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/Submission.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/Topics.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/analyser.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/analyser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/feedback.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/feedback.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/keywordExtraction.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/keywordExtraction.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/search.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/search.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/stopWords.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/stopWords.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/question.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/question.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/submissions.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/submissions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/utils/llm.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/llm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/axiosConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/axiosConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/DisplayCard.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/DisplayCard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/DisplayCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/DisplayCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/HeroSection.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/HeroSection.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/HeroSection.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/HeroSection.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/footer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/common/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/navbar.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/common/navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/context/AuthContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/context/AuthContext.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/HomePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Login.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Profile.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/SignUp.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/SignUp.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/SignUp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/QuestionList.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/QuestionList.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/QuestionView.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/QuestionView.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/UploadQuestion.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/UploadQuestion.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/UploadQuestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/UploadQuestion.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +39,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="CSS File" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -82,17 +58,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/frontend" />
@@ -117,6 +94,7 @@
       <workItem from="1709577649303" duration="502000" />
       <workItem from="1709578159384" duration="594000" />
       <workItem from="1709578760871" duration="17000" />
+      <workItem from="1709652255816" duration="11192000" />
     </task>
     <servers />
   </component>

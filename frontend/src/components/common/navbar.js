@@ -39,30 +39,18 @@ function Navbar(activeItem) {
                         <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
                     </div>
                     <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-                        <li className='nav-item'>
-                            <Link to='/' className={`nav-links ${activeItem === 'home' ? 'active' : ''}`} onClick={closeMobileMenu}>Home</Link>
-                        </li>
 
-                        {!isLoggedIn && (
+
+                        {isLoggedIn && (
                             <>
+                                <li className='nav-item'>
+                                <Link to='/UploadQuestion' className='nav-links' onClick={closeMobileMenu}>Upload A Question</Link>
+                            </li>
                                 <li className='nav-item'>
                                     <Link to='/question/list' className='nav-links' onClick={closeMobileMenu}>My Questions</Link>
                                 </li>
                                 <li className='nav-item'>
-                                    <Link to='/login' className={`nav-links ${activeItem === 'login' ? 'active' : ''}`} onClick={closeMobileMenu}>Login</Link>
-                                </li>
-                                <li>
-                                    <Link to='/sign-up' className={`nav-links ${activeItem === 'sign-up' ? 'active' : ''}`} onClick={closeMobileMenu}>Sign Up</Link>
-                                </li>
-                            </>
-                        )}
-                        {isLoggedIn && (
-                            <>
-                                <li className='nav-item'>
                                     <Link to='/Profile' className={`nav-links ${activeItem === 'Profile' ? 'active' : ''}`} onClick={closeMobileMenu}>Profile</Link>
-                                </li>
-                                <li className='nav-item'>
-                                    <Link to='/Settings' className={`nav-links ${activeItem === 'Settings' ? 'active' : ''}`} onClick={closeMobileMenu}>Settings</Link>
                                 </li>
                                 <li>
                                     <button className='nav-links-mobile' onClick={logout}>Logout</button>
@@ -71,9 +59,9 @@ function Navbar(activeItem) {
                         )}
                     </ul>
                     {isLoggedIn ? (
-                        <Button onClick={logout} buttonStyle='btn--outline'>Logout</Button>
+                        <Button className="btn-logout" onClick={logout} buttonStyle='btn--outline' buttonSize='btn--medium' >Sign Out</Button>
                     ) : (
-                        button && <Button buttonStyle='btn--outline' buttonSize='btn--large' redirectTo='/sign-up'>Sign Up</Button>
+                        button && <Button className="btn-logout" buttonStyle='btn--outline' buttonSize='btn--large' redirectTo='/login'>Sign In</Button>
                     )}
                 </div>
             </nav>

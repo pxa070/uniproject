@@ -6,6 +6,7 @@ import './Profile.css';
 function Profile() {
     const { user } = useContext(AuthContext);
     const [isUpdating, setIsUpdating] = useState(false);
+    const [isLoading,setIsLoading] = useState(false);
     const [profile, setProfile] = useState({ username: "", email: "", profile: "http://www.gravatar.com/avatar/9017a5f22556ae0eb7fb0710711ec125?s=128" });
     const [file, setFile] = useState(null);
 
@@ -36,6 +37,7 @@ function Profile() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (isUpdating) {
+            setIsLoading(true);
             const formData = new FormData();
             formData.append('username', profile.username);
             formData.append('email', profile.email);
@@ -52,6 +54,10 @@ function Profile() {
                 setIsUpdating(false);
             } catch (error) {
                 console.error(error);
+            }
+            finally {
+                setIsUpdating(false)
+                setIsLoading(false)
             }
         }
     };
@@ -89,6 +95,7 @@ function Profile() {
                             <label>Profile Picture</label>
                             <input
                                 type="file"
+                                accept="image/png, image/jpeg, image/gif"
                                 onChange={handleFileChange}
                             />
                         </div>
@@ -100,7 +107,7 @@ function Profile() {
                                 setIsUpdating(false);
                                 setProfile({ username: user.username, email: user.email, profile: user.image_url || "http://www.gravatar.com/avatar/9017a5f22556ae0eb7fb0710711ec125?s=128" });
                             }}>Cancel</button>
-                            <button type="submit" className='login-button'>Save</button>
+                            <button type="submit" className='login-button' disabled={isLoading}>{isLoading ? "Saving..." : "Save"}</button>
                         </div>
                     )}
                 </form>

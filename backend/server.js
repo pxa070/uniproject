@@ -1,4 +1,5 @@
 require("dotenv").config(); // Loads environment variables from .env file
+
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -11,24 +12,45 @@ const upload = require('./utils/uploadConfig');
 const db = require("./models");
 const { answer_assistant, compare_correctness } = require("./utils/llm");
 const path = require("path");
+const { Op } = require("sequelize");
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
 // Middleware
 app.use(cors()); // Enable CORS
 app.use(express.json()); // Parse JSON bodies
-console.log(path.resolve(__dirname, './', 'public'), ' path here')
 app.use(express.static(path.resolve(__dirname, './', 'public')));
+
+/*
+ function authenticate(req, res, next) {
+  try {
+    const token = req.headers.authorization?.split(' ')[1]; // Updated and optional chaining
+    if (!token) return res.status(401).send({ message: 'Missing authorization token' });
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.userId = decoded.userId;
+    next();
+  } catch (error) {
+    res.status(401).send({ message: 'Authentication failed' });
+  }
+} */
 
 app.get("/api/questions", authMiddleware, async (req, res) => {
   try {
     const pageNumber = parseInt(req.query.page) || 0;
     let questions = await db.Question.findAll({
+      where:{
+        user_id: req.userId,
+        model_answer_explanation: {
+          [Op.not]: null,
+          [Op.not]: ''
+        },
+      },
       limit: 10,
       offset: pageNumber * 10,
     });
-
-    // You might want to return only certain fields as needed; adjust accordingly
     res.json(questions);
   } catch (error) {
     console.error(error);
@@ -50,26 +72,29 @@ app.get("/api/questions/:question_id", async (req, res) => {
     res.status(500).json({ message: "Error fetching questions" });
   }
 });
+
 app.post(
     "/api/question/:question_id/answer",
     authMiddleware,
     async (req, res) => {
       try {
         let question = await db.Question.findOne({
-          question_id: req.params.question_id,
+          where: {
+            question_id: parseInt(req.params.question_id),
+          }
         });
         const similarity_index = await compare_correctness(
             question.question_text,
             question.model_answer_explanation,
             req.body.answer,
         );
-        const regex = /(\d\.\d+)/;
+        const regex = /[-+]?\d*\.?\d+([eE][-+]?\d+)?/g;
         const match = similarity_index.match(regex);
         if (!match) {
           return res.status(404).json({ message: "Please try again" });
         }
 
-        return res.status(200).json({ similarity_index: match[1] });
+        return res.status(200).json({ similarity_index: match });
       } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Error fetching questions" });
@@ -110,33 +135,40 @@ app.post("/api/questions", authMiddleware, async (req, res) => {
     res.status(500).json({ message: "Error creating question" });
   }
 });
+
 app.post("/api/questions/:questionId/submissions", async (req, res) => {
   try {
     const { questionId } = req.params;
     const { studentId, studentAnswer } = req.body; // Assuming you provide student identification
+
     const newSubmission = await db.Submission.create({
       question_id: questionId,
       student_id: studentId,
       student_answer: studentAnswer,
     });
+
     res.status(201).json(newSubmission);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error submitting answer" });
   }
 });
+
 app.get("/api/", (req, res) => {
   res.send("Hello World!");
 });
+
 // GET /api/users/:userId - Fetch user details
 app.get("/api/users/:userId", authMiddleware, async (req, res) => {
   const { userId } = req.params;
+
   try {
     const user = await await db.User.findOne({
       where: {
         id: userId,
       },
     });
+
     if (user) {
       res.json(user);
     } else {
@@ -153,12 +185,54 @@ function generateToken(userId) {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "24h" });
 }
 
+app.post("/api/forgot-password", async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await db.User.findOne({
+      where: {
+        email: email,
+      }
+    })
+    if(!user){
+      return res.status(400).send({ message: "User with this email does not exist" });
+    }
+    return res.status(200).json({ message: "Valid Email" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Server error reseting password" });
+  }
+})
+
+app.post("/api/reset-password", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await db.User.findOne({
+      where: {
+        email: email,
+      }
+    })
+    if(!user){
+      return res.status(400).send({ message: "User with this email does not exist" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await user.update({password: hashedPassword});
+    await user.save();
+    res.status(200).json({ message: "Password reset successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Server error reseting password" });
+  }
+})
+
 app.post("/api/signup", async (req, res) => {
   const { username, email, password } = req.body;
+
   // Validate email format
   if (!validator.isEmail(email)) {
     return res.status(400).send({ message: "Invalid email format" });
   }
+
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await db.User.create({
@@ -173,6 +247,7 @@ app.post("/api/signup", async (req, res) => {
     res.status(500).send("Server error during registration");
   }
 });
+
 // User login endpoint
 app.get("/api/getMe", authMiddleware, async (req, res) => {
   try {
@@ -193,6 +268,7 @@ app.get("/api/getMe", authMiddleware, async (req, res) => {
 });
 app.post("/api/login", async (req, res) => {
   const { username, password } = req.body;
+
   try {
     const user = await db.User.findOne({
       where: {
@@ -202,6 +278,7 @@ app.post("/api/login", async (req, res) => {
     if (user) {
       // Compare hashed password
       const match = await bcrypt.compare(password, user.password);
+
       if (match) {
         // Generate JWT token
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
@@ -219,18 +296,22 @@ app.post("/api/login", async (req, res) => {
     res.status(500).send({ message: "Server error during login" });
   }
 });
+
 // Authentication middleware (this is a simplified example, you should implement actual token verification)
+
 app.post(
     "/api/questions/:questionId/feedback",
     authMiddleware,
     async (req, res) => {
       const { feedback } = req.body;
       const { questionId } = req.params;
+
       try {
         const newFeedback = await db.QuestionFeedback.create({
           questionId: questionId,
           feedback: feedback,
         });
+
         res.status(201).json(newFeedback);
       } catch (error) {
         console.error(error);
@@ -240,13 +321,16 @@ app.post(
       }
     },
 );
+
 app.put("/api/users", authMiddleware, upload, async (req, res) => {
   const { username, email } = req.body;
+
   if (!validator.isEmail(email)) {
     return res.status(400).send({ message: "Invalid email format" });
   } else if (!username) {
     return res.status(400).send({ message: "Username required" });
   }
+
   try {
     const toUpdate = {
       username: username,
@@ -263,18 +347,21 @@ app.put("/api/users", authMiddleware, upload, async (req, res) => {
           },
         },
     );
+
     const updatedUser = await db.User.findOne({
       where: {
         id: req.userId,
       },
       attributes: ["username", "email", "image_url"],
     });
+
     return res.status(200).json(updatedUser);
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: "Server error when updating settings" });
   }
 });
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

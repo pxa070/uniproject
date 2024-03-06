@@ -56,6 +56,8 @@ function Login() {
                             required
                         />
                     </div>
+                    {error && <p className="error">{error}</p>} {/* Display error messages */}
+                    <Link style={{width : "100%",marginBottom : "5px"}} to="/forgot-password">Forgot Password?</Link>
                     <button type="submit" className="login-button">Submit</button>
                     {/* Add the link to the signup page here */}
                     <div className="signup-link">

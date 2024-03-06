@@ -1,0 +1,114 @@
+.QuestionView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 60vh;
+    margin-top: 60px;
+}
+.modernDrawer {
+    padding: 10px;
+    padding-top: 20px;
+    width: 450px !important;
+    overflow: auto;
+}
+
+.modernDrawer a {
+    margin-bottom: 20px;
+    display: inline-block;
+    cursor: pointer;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #40e0d0;
+}
+
+
+.ViewContainer {
+    margin-top: 30px;
+    align-items: center;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 69px 44px 27px;
+    position: relative;
+    width: 60%;
+    margin-right: 30px;
+}
+.ViewContainer .formHeader {
+    left: 40%;
+    position: absolute;
+    right: 0;
+    top: -33px;
+    font-size: 24px!important;
+    padding: 12px 10px!important;
+    border: none!important;
+    border-radius: 5px!important;
+    text-align: center;
+    color: #fff!important;
+    font-weight: 700!important;
+    height: auto!important;
+    outline: none!important;
+    background: #5c67ec!important;
+    width: fit-content;
+}
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 16px;
+    border: 1px solid #dddddd;
+}
+
+.login-button {
+    border: none!important;
+    border-radius: 5px!important;
+    color: #fff!important;
+    font-weight: 700!important;
+    height: auto!important;
+    outline: none!important;
+    width: fit-content;
+    background-color: #5c67ec !important;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 12px !important;
+}
+
+.login-button:hover {
+    background-color: #4a54d1;
+}
+.textbutton {
+    position:absolute;
+    bottom:20px;
+    right:1px;
+}
+.questionText {
+    width: 100%;
+    text-align: left;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.pageContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

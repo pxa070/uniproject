@@ -15,6 +15,8 @@ import { useAuth } from './components/context/AuthContext';
 import ProtectedRoute from './components/HOC/ProtectedRoute';
 import QuestionList from './components/pages/QuestionList';
 import QuestionView from './components/pages/QuestionView';
+import ForgotPassword from './components/pages/ForgotPassword';
+import ResetPassword from './components/pages/ResetPassword';
 function App() {
     const [isLoading,setIsLoading] = useState(true)
     const { setUser,logout } = useAuth();
@@ -51,6 +53,8 @@ function App() {
                             <Route path='/subjectareas' element={<SubjectAreas />} />
                             <Route path='/login' element={<Login />} />
                             <Route path='/sign-up' element={<SignUp />} />
+                            <Route path='/forgot-password' element={<ForgotPassword/>}/>
+                            <Route path="/reset-password" element={<ResetPassword/>}/>
                             <Route path='/Profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                             <Route path='/UploadQuestion' element={<ProtectedRoute><UploadQuestion /></ProtectedRoute>}/>
                             <Route path='/question/list' element={<ProtectedRoute><QuestionList/></ProtectedRoute>}/>

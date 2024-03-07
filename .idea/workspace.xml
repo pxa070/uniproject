@@ -5,24 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f340bd07-4ac0-4449-aada-630b8644d5d9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/models/password_reset_tokens.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/utils/email-config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/utils/email-util.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/utils/passwordResetEmailTemplate.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/DisplayCard.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/DisplayCard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/DisplayCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/DisplayCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/footer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/ForgotPassword.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/ForgotPassword.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Profile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/QuestionList.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/QuestionList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/QuestionView.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/QuestionView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/ForgotPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/ForgotPassword.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/QuestionView.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/QuestionView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/SignUp.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/SignUp.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/UploadQuestion.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/UploadQuestion.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/UploadQuestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/UploadQuestion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/ResetPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/ResetPassword.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,9 +61,9 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/utils" />
       <recent name="$PROJECT_DIR$/frontend" />
       <recent name="$PROJECT_DIR$/backend/routes" />
-      <recent name="$PROJECT_DIR$/backend/utils" />
       <recent name="$PROJECT_DIR$/backend/models" />
       <recent name="$PROJECT_DIR$/frontend/src/components/common" />
     </key>
@@ -87,7 +83,7 @@
       <workItem from="1709577649303" duration="502000" />
       <workItem from="1709578159384" duration="594000" />
       <workItem from="1709578760871" duration="17000" />
-      <workItem from="1709652255816" duration="34294000" />
+      <workItem from="1709652255816" duration="47101000" />
     </task>
     <servers />
   </component>

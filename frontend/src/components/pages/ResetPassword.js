@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ForgotPassword.css'; // Adjust the import path as necessary
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 function ResetPassword() {
     const [password,setPassword] = useState('')
@@ -9,12 +9,15 @@ function ResetPassword() {
     const [successMessage,setSuccessMessage] = useState('')
     const [confirmPassword,setConfirmPassword] = useState('')
     const location = useLocation()
+    const { token } = useParams();
+    console.log(token);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
             if(password === confirmPassword) {
-                const { data } = await axios.post('api/reset-password', { email:location.state.email,password });
+                const { data } = await axios.post('api/reset-password', { passwordToken: token, password});
                 setError('')
                 setSuccessMessage("Password successfully changed")
                 setPassword('')

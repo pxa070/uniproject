@@ -54,7 +54,7 @@ function App() {
                             <Route path='/login' element={<Login />} />
                             <Route path='/sign-up' element={<SignUp />} />
                             <Route path='/forgot-password' element={<ForgotPassword/>}/>
-                            <Route path="/reset-password" element={<ResetPassword/>}/>
+                            <Route path="/reset-password/:token" element={<ResetPassword/>}/>
                             <Route path='/Profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                             <Route path='/UploadQuestion' element={<ProtectedRoute><UploadQuestion /></ProtectedRoute>}/>
                             <Route path='/question/list' element={<ProtectedRoute><QuestionList/></ProtectedRoute>}/>

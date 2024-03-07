@@ -13,7 +13,6 @@ function ForgotPassword() {
 
         try {
             const { data } = await axios.post('api/forgot-password', { email });
-            navigate('/reset-password',{state :{email}})
         } catch (error) {
             if (error.response && error.response.data) {
                 setError(error.response.data.message); // Use server's error message

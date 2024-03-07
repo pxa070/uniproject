@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 import "./QuestionView.css";
 import axios from 'axios';
 import 'react-modern-drawer/dist/index.css'
@@ -8,6 +8,7 @@ import GaugeChart from 'react-gauge-chart'
 
 const QuestionView = () => {
     const { id } = useParams()
+    const navigate = useNavigate(); // Add this for navigation
     const [question, setQuestion] = useState(undefined)
     const [isFetching, setIsFetching] = useState(true);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -55,6 +56,10 @@ const QuestionView = () => {
     useEffect(() => {
         fetchQuestion()
     }, [])
+
+    const handleViewAnswer = () => {
+        navigate(`/model-answer/${id}`); // Redirect to model answer page
+    };
 
     return (
         <div className='QuestionView'>
@@ -111,18 +116,54 @@ const QuestionView = () => {
                                 </div>
                                 {similartyIndex.show &&
                                     <div style={{ display: 'flex', flexDirection: 'column', width: '35%' }}>
-                                        <p>{question.model_answer_explanation}</p>
-                                        <div style={{width: '100%'}}>
-                                            <GaugeChart id="gauge-chart2"
-                                                        nrOfLevels={20}
-                                                        colors={["#FF5F6D", "#00FF00"]}
-                                                        percent={similartyIndex.value}
-                                                        textColor={"#4a54d1"}
-                                                        style={{ width: "100%" }}
-                                            />
-                                        </div>
+                                        {similartyIndex.value === 1 ? (
+                                            <>
+                                                <p style={{color: "green"}}>Perfect! Your answer is exactly right!</p>
+                                                <div style={{width: '100%'}}>
+                                                    <GaugeChart id="gauge-chart2"
+                                                                nrOfLevels={20}
+                                                                colors={["#FF5F6D", "#00FF00"]}
+                                                                arcWidth={0.3} // Adjust for visual preference
+                                                                percent={1}
+                                                                textColor={"#4a54d1"}
+                                                                style={{ width: "100%" }}
+                                                    />
+                                                </div>
+                                            </>
+                                        ) : similartyIndex.value >= 0.65 ? (
+                                            <>
+                                                <p style={{color: "green"}}>Great job! Your answer is quite accurate. Here's the model answer for more insights:</p>
+                                                <p>{question.model_answer_explanation}</p>
+                                                <div style={{width: '100%'}}>
+                                                    <GaugeChart id="gauge-chart2"
+                                                                nrOfLevels={20}
+                                                                colors={["#FF5F6D", "#00FF00"]}
+                                                                arcWidth={0.3} // Adjust for visual preference
+                                                                percent={similartyIndex.value}
+                                                                textColor={"#4a54d1"}
+                                                                style={{ width: "100%" }}
+                                                    />
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <p style={{color: "red"}}>Your answer needs improvement. Please review the resources and try again.</p>
+                                                <div style={{width: '100%'}}>
+                                                    <GaugeChart id="gauge-chart2"
+                                                                nrOfLevels={20}
+                                                                colors={["#FF5F6D", "#00FF00"]}
+                                                                arcWidth={0.3} // Adjust for visual preference
+                                                                percent={similartyIndex.value}
+                                                                textColor={"#4a54d1"}
+                                                                style={{ width: "100%" }}
+                                                    />
+                                                </div>
+                                            </>
+                                        )}
                                     </div>
                                 }
+
+
 
                             </div>
                         </>

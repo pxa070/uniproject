@@ -1,5 +1,4 @@
 require("dotenv").config(); // Loads environment variables from .env file
-
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -13,6 +12,11 @@ const db = require("./models");
 const { answer_assistant, compare_correctness } = require("./utils/llm");
 const path = require("path");
 const { Op } = require("sequelize");
+const crypto = require('crypto');
+
+const { PasswordResetToken } = require("./models/password_reset_tokens");
+const { passwordResetEmailTemplate } = require('./utils/passwordResetEmailTemplate');
+const {sendEmail} = require("./utils/email-util");
 
 
 const app = express();
@@ -196,24 +200,64 @@ app.post("/api/forgot-password", async (req, res) => {
     if(!user){
       return res.status(400).send({ message: "User with this email does not exist" });
     }
+    const token = crypto.randomBytes(20).toString('hex');
+    const expiry = new Date(Date.now() + 900000); //Token expires 15 mins
+    await db.PasswordResetToken.create({
+      userId: user.id,
+      token: token,
+      expiry: expiry
+    });
+
+
+    const emailMsg = {
+      subject: "Password reset",
+      text: `Your password reset link is: http://localhost:3000/resetpassword/${token}`,
+      html: passwordResetEmailTemplate(token)
+    }
+    try {
+      await sendEmail(email, emailMsg);
+      console.log({message: 'Your query has been sent'});
+    } catch (e) {
+      console.error(e);
+    }
+
     return res.status(200).json({ message: "Valid Email" });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: "Server error reseting password" });
+    res.status(500).send({ message: "Server error resetting password" });
   }
 })
 
 app.post("/api/reset-password", async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const user = await db.User.findOne({
+    const { passwordToken, password } = req.body;
+    const userToken = await db.PasswordResetToken.findOne({
       where: {
-        email: email,
+        token: passwordToken,
       }
     })
-    if(!user){
-      return res.status(400).send({ message: "User with this email does not exist" });
+    if(!userToken){
+      return res.status(400).send({ message: "Password token does not exist" });
     }
+    const now = new Date();
+    if (userToken.expiry < now) {
+      await userToken.destroy();
+      return res.status(400).send({ message: "Password token has expired" });
+    }
+
+      const user = await db.User.findOne({
+        where: {
+          id: userToken.userId,
+        }
+      })
+    if(!user){
+      return res.status(400).send({ message: "User does not exist" });
+    }
+
+
+
+
+
 
     const hashedPassword = await bcrypt.hash(password, 10);
     await user.update({password: hashedPassword});
@@ -221,7 +265,7 @@ app.post("/api/reset-password", async (req, res) => {
     res.status(200).json({ message: "Password reset successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: "Server error reseting password" });
+    res.status(500).send({ message: "Server error resetting password" });
   }
 })
 

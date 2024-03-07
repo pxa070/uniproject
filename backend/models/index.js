@@ -16,6 +16,7 @@ db.QuestionTopicLink = require("./QuestionTopic")(
     sequelize,
     Sequelize.DataTypes,
 );
+db.PasswordResetToken = require("./password_reset_tokens")(sequelize, Sequelize.DataTypes);
 sequelize
     .sync({ alter: true })
     .then(() => {

@@ -15,7 +15,7 @@ const QuestionView = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [answer, setAnswer] = useState("")
     const [error,setError] = useState('')
-    const [similartyIndex, setSimilartyIndex] = useState({
+    const [similarityIndex, setSimilarityIndex] = useState({
         value: 0,
         show: false
     })
@@ -39,7 +39,7 @@ const QuestionView = () => {
 
                 setIsSubmitting(true)
                 const {data} = await axios.post(`api/question/${id}/answer`, {answer})
-                setSimilartyIndex({
+                setSimilarityIndex({
                     show: true,
                     value: Number(data.similarity_index)
                 })
@@ -114,9 +114,9 @@ const QuestionView = () => {
                                     </div>
                                     <button onClick={() => setIsDrawerOpen(true)} className="login-button">Check Resources</button>
                                 </div>
-                                {similartyIndex.show &&
+                                {similarityIndex.show &&
                                     <div style={{ display: 'flex', flexDirection: 'column', width: '35%' }}>
-                                        {similartyIndex.value === 1 ? (
+                                        {similarityIndex.value === 1 ? (
                                             <>
                                                 <p style={{color: "green"}}>Perfect! Your answer is exactly right!</p>
                                                 <div style={{width: '100%'}}>
@@ -130,16 +130,16 @@ const QuestionView = () => {
                                                     />
                                                 </div>
                                             </>
-                                        ) : similartyIndex.value >= 0.65 ? (
+                                        ) : similarityIndex.value >= 0.65 ? (
                                             <>
-                                                <p style={{color: "green"}}>Great job! Your answer is quite accurate. Here's the model answer for more insights:</p>
+                                                <p style={{color: "green"}}>Great job! Your answer is quite accurate. Would you like to check the model answer?</p>
                                                 <p>{question.model_answer_explanation}</p>
                                                 <div style={{width: '100%'}}>
                                                     <GaugeChart id="gauge-chart2"
                                                                 nrOfLevels={20}
                                                                 colors={["#FF5F6D", "#00FF00"]}
                                                                 arcWidth={0.3} // Adjust for visual preference
-                                                                percent={similartyIndex.value}
+                                                                percent={similarityIndex.value}
                                                                 textColor={"#4a54d1"}
                                                                 style={{ width: "100%" }}
                                                     />
@@ -153,7 +153,7 @@ const QuestionView = () => {
                                                                 nrOfLevels={20}
                                                                 colors={["#FF5F6D", "#00FF00"]}
                                                                 arcWidth={0.3} // Adjust for visual preference
-                                                                percent={similartyIndex.value}
+                                                                percent={similarityIndex.value}
                                                                 textColor={"#4a54d1"}
                                                                 style={{ width: "100%" }}
                                                     />

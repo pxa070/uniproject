@@ -5,20 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f340bd07-4ac0-4449-aada-630b8644d5d9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/models/password_reset_tokens.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/utils/email-config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/utils/email-util.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/utils/passwordResetEmailTemplate.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/ForgotPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/ForgotPassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/footer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/navbar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/QuestionView.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/QuestionView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/ResetPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/ResetPassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Settings.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Settings.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Settings.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -47,18 +43,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend/utils" />
@@ -83,7 +79,12 @@
       <workItem from="1709577649303" duration="502000" />
       <workItem from="1709578159384" duration="594000" />
       <workItem from="1709578760871" duration="17000" />
-      <workItem from="1709652255816" duration="47101000" />
+      <workItem from="1709652255816" duration="56351000" />
+      <workItem from="1709909173551" duration="1827000" />
+      <workItem from="1710885823846" duration="2967000" />
+      <workItem from="1711221999824" duration="1662000" />
+      <workItem from="1711399863514" duration="6779000" />
+      <workItem from="1711554425555" duration="1399000" />
     </task>
     <servers />
   </component>

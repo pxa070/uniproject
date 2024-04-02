@@ -18,6 +18,7 @@ import QuestionView from './components/pages/QuestionView';
 import ForgotPassword from './components/pages/ForgotPassword';
 import ResetPassword from './components/pages/ResetPassword';
 import Settings from "./components/pages/Settings";
+import AdminDashboard from "./components/pages/AdminDashboard";
 
 function App() {
     const [isLoading,setIsLoading] = useState(true)
@@ -56,8 +57,9 @@ function App() {
                             <Route path='/login' element={<Login />} />
                             <Route path='/sign-up' element={<SignUp />} />
                             <Route path='/forgot-password' element={<ForgotPassword/>}/>
-                            <Route path="/reset-password" element={<ResetPassword/>}/>
+                            <Route path="/reset-password/:token" element={<ResetPassword/>}/>
                             <Route path='/Profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+                            <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>}/>
                             <Route path='/UploadQuestion' element={<ProtectedRoute><UploadQuestion /></ProtectedRoute>}/>
                             <Route path='/question/list' element={<ProtectedRoute><QuestionList/></ProtectedRoute>}/>
                             <Route path="/question/:id" element={<ProtectedRoute><QuestionView/></ProtectedRoute>}/>

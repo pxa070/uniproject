@@ -12,6 +12,12 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
                 unique: true,
             },
+            // Add a new role attribute
+            role: {
+                type: DataTypes.STRING(255),
+                allowNull: false,
+                defaultValue: 'user', // Default value is 'user'
+            },
             password: {
                 type: DataTypes.STRING(255),
                 allowNull: false,

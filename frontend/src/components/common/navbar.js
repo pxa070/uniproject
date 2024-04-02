@@ -8,6 +8,7 @@ function Navbar(activeItem) {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
     const { isLoggedIn, logout } = useAuth();
+    const isAdmin = localStorage.getItem('role') === 'admin'; // Check if user is an admin
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -43,31 +44,34 @@ function Navbar(activeItem) {
 
                         {isLoggedIn && (
                             <>
+                                {isAdmin && (
+                                    <li className='nav-item'>
+                                        <Link to='/admin/dashboard' className='nav-links' onClick={closeMobileMenu}>Admin</Link>
+                                    </li>
+                                )}
                                 <li className='nav-item'>
-                                <Link to='/question/list' className='nav-links' onClick={closeMobileMenu}>My Questions</Link>
-                            </li>
+                                    <Link to='/question/list' className='nav-links' onClick={closeMobileMenu}>My Questions</Link>
+                                </li>
                                 <li className='nav-item'>
                                     <Link to='/Profile' className={`nav-links ${activeItem === 'Profile' ? 'active' : ''}`} onClick={closeMobileMenu}>Profile</Link>
                                 </li>
-
                                 <li className='nav-item'>
-                                <Link to='/Settings' className='nav-links' onClick={closeMobileMenu}>Settings</Link>
-                            </li>
+                                    <Link to='/Settings' className='nav-links' onClick={closeMobileMenu}>Settings</Link>
+                                </li>
                                 <li className='nav-item'>
                                     <Link to='/UploadQuestion' className='nav-links' onClick={closeMobileMenu}>Upload Question</Link>
                                 </li>
-
-                                <li>
+                                <li className='nav-item-mobile'>
                                     <button className='nav-links-mobile' onClick={logout}>Logout</button>
                                 </li>
                             </>
                         )}
                     </ul>
-                    {isLoggedIn ? (
-                        <Button className="btn-logout" onClick={logout} buttonStyle='btn--outline' buttonSize='btn--medium' >Sign Out</Button>
+                    {button && (isLoggedIn ? (
+                        <Button className="btn-logout" onClick={logout} buttonStyle='btn--outline' buttonSize='btn--medium'>Sign Out</Button>
                     ) : (
-                        button && <Button className="btn-logout" buttonStyle='btn--outline' buttonSize='btn--large' redirectTo='/login'>Sign In</Button>
-                    )}
+                        <Link to='/login'><Button className="btn-logout" buttonStyle='btn--outline' buttonSize='btn--large'>Sign In</Button></Link>
+                    ))}
                 </div>
             </nav>
         </>
@@ -75,7 +79,6 @@ function Navbar(activeItem) {
 }
 
 export default Navbar;
-
 
 
 

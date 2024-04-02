@@ -6,7 +6,7 @@ const validator = require("validator");
 const cors = require("cors");
 const analyzeQuestion = require("./utils/analyser");
 const fetchResources = require("./utils/search");
-const authMiddleware = require("./middleware/auth");
+const {authMiddleware, requireRole} = require("./middleware/auth");
 const upload = require('./utils/uploadConfig');
 const db = require("./models");
 const { answer_assistant, compare_correctness } = require("./utils/llm");
@@ -325,7 +325,7 @@ app.post("/api/login", async (req, res) => {
 
       if (match) {
         // Generate JWT token
-        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ userId: user.id, role: user.role}, process.env.JWT_SECRET, {
           expiresIn: "24h",
         });
         res.json({ token: token, user });
@@ -405,6 +405,87 @@ app.put("/api/users", authMiddleware, upload, async (req, res) => {
     res.status(500).send({ message: "Server error when updating settings" });
   }
 });
+
+// In your routes (ensure this is protected or limited to a setup script)
+// This route is an example; secure appropriately
+
+
+// IMPORTANT: Secure this endpoint properly to prevent unauthorized admin creation.
+
+
+// Route to delete a user by ID
+// Deleting a user by ID with related questions due to foreign key constraint
+// Deleting a user by ID with related questions due to foreign key constraint
+app.delete('/api/admin/users/:userId', [authMiddleware, requireRole('admin')], async (req, res) => {
+  const { userId } = req.params;
+  try {
+    // Delete related questions first
+    await db.Question.destroy({
+      where: { user_id: userId }
+    });
+
+    // Then delete the user
+    const deletedUser = await db.User.destroy({
+      where: { id: userId } // Correct column name
+    });
+
+    if (deletedUser) {
+      return res.status(200).json({ message: 'User and related questions deleted successfully.' });
+    } else {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Server error while deleting user.' });
+  }
+});
+
+// Fetching all users for admin dashboard
+app.get('/api/admin/users', [authMiddleware, requireRole('admin')], async (req, res) => {
+  try {
+    const users = await db.User.findAll({
+      attributes: ['id', 'username', 'email', 'created_at', 'image_url']
+        });
+    res.json(users);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ message: "Failed to fetch users", error: error.message });
+  }
+});
+
+// Fetching all questions for admin dashboard
+app.get('/api/admin/questions', [authMiddleware, requireRole('admin')], async (req, res) => {
+  try {
+    const questions = await db.Question.findAll({
+      attributes: ['question_id', 'question_text'] // Only select necessary fields
+    });
+    res.json(questions);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error fetching questions" });
+  }
+});
+
+// Deleting a question by ID
+app.delete('/api/admin/questions/:questionId', [authMiddleware, requireRole('admin')], async (req, res) => {
+  const { questionId } = req.params;
+  try {
+    const deletedQuestion = await db.Question.destroy({
+      where: { question_id: questionId } // Correct column name
+    });
+
+    if (deletedQuestion) {
+      return res.status(200).json({ message: 'Question deleted successfully.' });
+    } else {
+      return res.status(404).json({ message: 'Question not found.' });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Server error while deleting question.' });
+  }
+});
+
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

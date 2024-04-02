@@ -3,7 +3,7 @@ const mailgun = require('mailgun-js')(emailConfig);
 exports.sendEmail = (recipient, message, attachment) =>
     new Promise((resolve, reject) => {
         const data = {
-            from: "Studyhub Support <support@studyhub.com>",
+            from: "Studyhub Support <support@studyhub.live>",
         to: recipient,
             subject: message.subject,
             text: message.text,

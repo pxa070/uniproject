@@ -132,7 +132,7 @@ const QuestionView = () => {
                                             </>
                                         ) : similarityIndex.value >= 0.65 ? (
                                             <>
-                                                <p style={{color: "green"}}>Great job! Your answer is quite accurate. Would you like to check the model answer?</p>
+                                                <p style={{color: "green"}}>Great job! Your answer is quite accurate. Here is the model answer: </p>
                                                 <p>{question.model_answer_explanation}</p>
                                                 <div style={{width: '100%'}}>
                                                     <GaugeChart id="gauge-chart2"

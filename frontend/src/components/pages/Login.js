@@ -1,22 +1,33 @@
 import React, { useState } from 'react';
 import './Login.css';
-import {Link, useNavigate} from "react-router-dom";
-import {useAuth} from "../context/AuthContext"; // Adjust the import path as necessary
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext"; // Adjust the import path as necessary
 import axios from 'axios';
+
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const { login } = useAuth(); // Use useContext to access login function
     const [error, setError] = useState('');
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             // Adjust the endpoint if your server configuration requires
             const { data } = await axios.post('api/login', { username, password });
-            console.log(data , "data here")
-            login(data.token,data?.user); // Update the login state and localStorage with the token
-            navigate('/'); // Redirect to the homepage or dashboard after successful login
+            console.log(data, "data here")
+            login(data.token, data?.user); // Update the login state and localStorage with the token
+            localStorage.setItem('role', data.user.role);
+
+
+            // Redirect based on the role
+            // Ensure your API response includes the role
+            if (data?.user?.role === 'admin') {
+                navigate('/admin/dashboard'); // Redirect to the admin dashboard
+            } else {
+                navigate('/'); // Redirect to the homepage or user-specific dashboard
+            }
         } catch (error) {
             // Handle error response from the server
             if (error.response && error.response.data) {
@@ -56,10 +67,8 @@ function Login() {
                             required
                         />
                     </div>
-                    {error && <p className="error">{error}</p>} {/* Display error messages */}
-                    <Link style={{width : "100%",marginBottom : "5px"}} to="/forgot-password">Forgot Password?</Link>
+                    <Link style={{ width: "100%", marginBottom: "5px" }} to="/forgot-password">Forgot Password?</Link>
                     <button type="submit" className="login-button">Submit</button>
-                    {/* Add the link to the signup page here */}
                     <div className="signup-link">
                         Don't have an account? <Link to="/sign-up">Sign up</Link>
                     </div>

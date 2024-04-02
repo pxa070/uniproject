@@ -1,6 +1,6 @@
 function passwordResetEmailTemplate(token) {
-    const resetPasswordUrl = `http://localhost:3000/resetpassword/${token}`;
-    const supportEmail = "support@studyhub.studyhub.com";
+    const resetPasswordUrl = `http://localhost:3000/reset-password/${token}`;
+    const supportEmail = "support@studyhub.live";
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -26,7 +26,7 @@ function passwordResetEmailTemplate(token) {
                 overflow: hidden;
             }
             .header {
-                background-color: #2c2c2c; /* MOTIVE blue */
+                background-color: #40e0d0; 
                 color: #ffffff;
                 padding: 20px 40px;
                 text-align: center;
@@ -43,7 +43,7 @@ function passwordResetEmailTemplate(token) {
                 padding: 20px;
             }
             .button {
-                background-color: #1E55B3;
+                background-color: #40e0d0;
                 color: #ffffff;
                 padding: 10px 20px;
                 text-decoration: none;

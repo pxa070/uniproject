@@ -67,9 +67,11 @@ function Login() {
                             required
                         />
                     </div>
-                    <Link style={{ width: "100%", marginBottom: "5px" }} to="/forgot-password">Forgot Password?</Link>
+                    <div className="forgot-link">
+                       <Link to="/forgot-password">Forgot Password?</Link>
+                    </div>
                     <button type="submit" className="login-button">Submit</button>
-                    <div className="signup-link">
+                    <div className="signing-link">
                         Don't have an account? <Link to="/sign-up">Sign up</Link>
                     </div>
                 </form>

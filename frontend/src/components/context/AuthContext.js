@@ -28,8 +28,6 @@ export const AuthProvider = ({ children }) => {
     // Login function updates isLoggedIn state and stores token
     const login = (token,user) => {
         localStorage.setItem('token', token);
-        // Assuming API response structure is { token, user }, extract here if so
-        // Or wherever appropriate to get user
         console.log(user,"user in login")
         setIsLoggedIn(true);
         setUser(user);
@@ -37,9 +35,17 @@ export const AuthProvider = ({ children }) => {
 
     // Logout function clears token and updates state
     const logout = () => {
+        resetSettingsToDefault();
+
         localStorage.removeItem('token'); // Clear saved token
         setIsLoggedIn(false);
         setUser(null)
+    };
+
+    const resetSettingsToDefault = () => {
+        localStorage.setItem('contrast', 'normal'); // Reset to default contrast
+        localStorage.setItem('textSize', 'medium'); // Reset to default text size
+        document.body.className = 'contrast-normal text-medium'; // Apply default class names
     };
 
 

@@ -57,8 +57,8 @@ app.get("/api/questions", authMiddleware, async (req, res) => {
     });
     res.json(questions);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error fetching questions" });
+    console.error("Failed to submit question:", error);
+    res.status(500).json({ message: "Error submitting question", error: error.message });
   }
 });
 
@@ -145,18 +145,37 @@ app.post("/api/questions/:questionId/submissions", async (req, res) => {
     const { questionId } = req.params;
     const { studentId, studentAnswer } = req.body; // Assuming you provide student identification
 
-    const newSubmission = await db.Submission.create({
-      question_id: questionId,
-      student_id: studentId,
-      student_answer: studentAnswer,
+    // Retrieve the question text from the database
+    const question = await db.Question.findOne({
+      where: { question_id: questionId },
     });
 
-    res.status(201).json(newSubmission);
+    if (!question) {
+      return res.status(404).send({ message: "Question not found" });
+    }
+
+    // Calculate the similarity index - assuming compare_correctness function is available
+    // Storing score with the answer
+    const similarityIndex = await compare_correctness(question.question_text, question.model_answer, studentAnswer);
+
+    // Store the student's answer and the similarity index in the database
+    const newSubmission = await db.Submission.create({
+      questionId: questionId,
+      studentId: studentId,
+      studentAnswer: studentAnswer,
+      similarityIndex: similarityIndex, // Store the calculated similarity index
+    });
+
+    res.status(201).json({
+      message: "Answer submitted successfully",
+      data: newSubmission
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error submitting answer" });
   }
 });
+
 
 app.get("/api/", (req, res) => {
   res.send("Hello World!");
@@ -192,6 +211,12 @@ function generateToken(userId) {
 app.post("/api/forgot-password", async (req, res) => {
   try {
     const { email } = req.body;
+
+    console.log('Received email:', email);
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
     const user = await db.User.findOne({
       where: {
         email: email,
@@ -343,28 +368,7 @@ app.post("/api/login", async (req, res) => {
 
 // Authentication middleware (this is a simplified example, you should implement actual token verification)
 
-app.post(
-    "/api/questions/:questionId/feedback",
-    authMiddleware,
-    async (req, res) => {
-      const { feedback } = req.body;
-      const { questionId } = req.params;
 
-      try {
-        const newFeedback = await db.QuestionFeedback.create({
-          questionId: questionId,
-          feedback: feedback,
-        });
-
-        res.status(201).json(newFeedback);
-      } catch (error) {
-        console.error(error);
-        res
-            .status(500)
-            .send({ message: "Server error when submitting feedback" });
-      }
-    },
-);
 
 app.put("/api/users", authMiddleware, upload, async (req, res) => {
   const { username, email } = req.body;
@@ -484,6 +488,39 @@ app.delete('/api/admin/questions/:questionId', [authMiddleware, requireRole('adm
     return res.status(500).json({ message: 'Server error while deleting question.' });
   }
 });
+
+app.put("/api/change-password", async (req, res) => {
+  const { userId, currentPassword, newPassword } = req.body;
+
+  try {
+    const user = await db.User.findOne({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found." });
+    }
+
+    // Verify the current password
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).send({ message: "Current password is incorrect." });
+    }
+
+    // Hash and set the new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await user.update({ password: hashedPassword });
+
+    res.status(200).json({ message: "Password changed successfully." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Server error changing password." });
+  }
+});
+
+
 
 
 

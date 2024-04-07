@@ -49,7 +49,11 @@ function QuestionForm() {
         try {
             setError('')
 
-            const { data } = await axios.post('/api/questions', { questionText });
+            const { data } = await axios.post('/api/questions', { questionText }, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}` // Assuming the token is stored in localStorage
+                }
+            });
             console.log('Question submitted:', data);
             // Reset form or redirect as needed
             navigate('/question/list');

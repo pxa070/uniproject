@@ -3,6 +3,7 @@ const router = express.Router();
 const Submission = require("../models/Submission");
 const authMiddleware = require("../middleware/auth");
 const analyzeQuestion = require("/backend/utils/analyser");
+const {answer_assistant, compare_correctness} = require("../utils/llm");
 // GET: Fetch Submissions (With potential access controls)
 router.get("/", authMiddleware, async (req, res) => {
     try {
@@ -42,11 +43,16 @@ router.post(
     try {
         const analysisResult = analyzeQuestion(questionText);
 
+        const modelAnswer = await answer_assistant(questionText);
+        const similarityIndex = await compare_correctness(questionText, modelAnswer, studentAnswer);
+
+
         const newSubmission = await Submission.create({
             questionId,
             studentId,
             studentAnswer,
             questionText,
+            similarityIndex,
             keywords: analysisResult.keywords.join(","),
         });
 

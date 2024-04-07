@@ -19,6 +19,9 @@ import ForgotPassword from './components/pages/ForgotPassword';
 import ResetPassword from './components/pages/ResetPassword';
 import Settings from "./components/pages/Settings";
 import AdminDashboard from "./components/pages/AdminDashboard";
+import GDPRPage from "./components/pages/GDPR";
+
+
 
 function App() {
     const [isLoading,setIsLoading] = useState(true)
@@ -63,7 +66,9 @@ function App() {
                             <Route path='/UploadQuestion' element={<ProtectedRoute><UploadQuestion /></ProtectedRoute>}/>
                             <Route path='/question/list' element={<ProtectedRoute><QuestionList/></ProtectedRoute>}/>
                             <Route path="/question/:id" element={<ProtectedRoute><QuestionView/></ProtectedRoute>}/>
-                            <Route path= "/Settings" element={<Settings/>}/>
+                            <Route path= "/Settings" element={<ProtectedRoute><Settings/></ProtectedRoute>}/>
+                            <Route path='/GDPR' element={<GDPRPage />} />
+
 
                         </Routes>
 

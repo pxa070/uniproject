@@ -1,2 +1,121 @@
-/* In your main CSS file */
-/* Default light theme */
+/* Settings.css */
+.settings-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.settings-container h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.0rem;
+    color: #333;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+.settings-section {
+    margin-bottom: 2rem;
+}
+
+.settings-container h2 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    border-bottom: 2px solid #40e0d0;
+}
+
+.button-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.settings-container button {
+    border: none!important;
+    border-radius: 5px!important;
+    color: #fff!important;
+    font-weight: 700!important;
+    height: auto!important;
+    outline: none!important;
+    padding: 12px 20px; /* Larger padding for better touch */
+    cursor: pointer;
+    background-color: #40e0d0;
+    width: auto; /* Auto width based on content */
+    transition: background-color 0.3s ease;
+}
+
+.settings-container button:hover, .settings-container button:focus {
+    background-color: #35c2b4; /* A darker shade of your theme color for hover state */
+
+}
+
+
+/* Add responsive breakpoints if necessary */
+@media (max-width: 768px) {
+    .settings-container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .settings-section {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Contrast and Text Size specific styles if needed */
+body.contrast-high {
+    filter: contrast(1.5);
+}
+
+body.contrast-low {
+    filter: contrast(0.75);
+}
+
+body.text-small {
+    font-size: 0.85em;
+}
+
+body.text-large {
+    font-size: 1.15em;
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+    transition: font-size 0.3s ease;
+}
+
+/* Then set the text size for different classes */
+body.text-small h1,
+body.text-small h2,
+body.text-small h3,
+body.text-small h4,
+body.text-small h5,
+body.text-small h6 {
+    font-size: 1.2em; /* Adjust the size as per your design */
+}
+
+body.text-medium h1,
+body.text-medium h2,
+body.text-medium h3,
+body.text-medium h4,
+body.text-medium h5,
+body.text-medium h6 {
+    font-size: 1.8em; /* This is typically the default size */
+}
+
+body.text-large h1,
+body.text-large h2,
+body.text-large h3,
+body.text-large h4,
+body.text-large h5,
+body.text-large h6 {
+    font-size: 2.2em; /* Adjust the size as per your design */
+}
+

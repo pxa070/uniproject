@@ -1,5 +1,46 @@
+.nav-menu.active {
+    display: flex;
+    flex-direction: column;
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
+    position: fixed; /* Fixed position to stay in view */
+    top: 0;
+    left: 0;
+    background-color: #40e0d0; /* Adjust background color as needed */
+    z-index: 1; /* Ensure menu is above other content */
+    align-items: center; /* Center menu items horizontally */
+    justify-content: center; /* Center menu items vertically */
+}
+
+.btn-logout {
+    border: 1px solid #fff; /* Border color */
+    border-radius: 5px;
+    padding: 8px 20px;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 0;
+}
+
+.btn-logout:hover {
+    background-color: #fff;
+    color: #40e0d0;
+}
+
+
+
+
+
+
+.nav-item-mobile.hide {
+    display: none;
+}
+
+
 .nav-item .nav-links.active {
     font-weight: bold;
+    width: 100%; /* Full width for each nav item */
     /* Add any other styles for active state here */
 }
 
@@ -66,6 +107,22 @@
 
 }
 
+.nav-link-desktop{
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    height: 100%;
+}
+
+.nav-link-desktop:hover{
+    border-bottom: 4px solid rgb(34, 193, 195); /* A shade from the logo */
+    transition: all 0.2s ease-out;
+}
+
+
+
 .nav-links {
     color: #fff;
     display: flex;
@@ -80,12 +137,26 @@
     transition: all 0.2s ease-out;
 }
 
+
+
 .fa-bars {
     color: #fff;
 }
 
 .nav-links-mobile {
-    display: none;
+    display: block; /* Ensure "Logout" button is visible */
+    text-align: center;
+    padding: 10px;
+    width: 100%; /* Full width */
+    color: #fff; /* Text color */
+    text-decoration: none;
+    background: none; /* Remove any background styling */
+    border: none; /* Remove borders */
+}
+
+.nav-links, .nav-links-mobile {
+    padding: 12px 20px;
+    width: auto; /* Adjust width as needed */
 }
 
 .menu-icon {
@@ -98,25 +169,23 @@
     }
 
     .nav-menu {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 90vh;
-        position: absolute;
-        top: 80px;
-        left: -100%;
-        opacity: 1;
-        transition: all 0.5s ease;
-        justify-content: end;
+        display: none;
     }
 
     .nav-menu.active {
-        background: #242222;
-        left: 0;
-        opacity: 1;
-        transition: all 0.5s ease;
-        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 80px;
+        right: 0;
+        background-color: #40e0d0;
     }
+
+    .nav-item-mobile {
+        display: block;
+    }
+
 
     .nav-links {
         text-align: center;
@@ -141,12 +210,13 @@
     .menu-icon {
         display: block;
         position: absolute;
-        top: 0;
         right: 0;
+        top: 0;
         transform: translate(-100%, 60%);
         font-size: 1.8rem;
         cursor: pointer;
     }
+
 
     .fa-times {
         color: #fff;
@@ -154,19 +224,11 @@
     }
 
     .nav-links-mobile {
-        display: block;
-        text-align: center;
-        margin: 2rem auto;
-        border-radius: 4px;
-        width: 80%;
-        text-decoration: none;
-        font-size: 1.5rem;
-        background-color: transparent;
-        color: #fff;
-        padding: 14px 20px;
-        border: 1px solid #fff;
-        transition: all 0.3s ease-out;
+        display: block; /* Show "Logout" button in dropdown */
     }
+
+
+
 
     .nav-links-mobile:hover {
         background: rgb(34, 193, 195); /* A shade from the logo */
@@ -174,7 +236,17 @@
         transition: 250ms;
     }
     .btn-logout {
-        display: none;
+        display: inline-block; /* or 'block' depending on desired layout */
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(-50%, 50%);
     }
+
+    .nav-link-desktop {
+        display: none; /* Hide desktop sign in button in mobile view */
+    }
+
+
 
 }

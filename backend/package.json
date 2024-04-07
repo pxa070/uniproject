@@ -48,6 +48,7 @@
     "validator": "^13.11.0"
   },
   "devDependencies": {
-    "prettier": "3.2.2"
+    "prettier": "3.2.2",
+    "sequelize-cli": "^6.6.2"
   }
 }

@@ -1,40 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import './Settings.css'; // Your CSS file to style the settings page
 
 function AccessibilitySettings() {
-    // Function to toggle theme
-    const toggleTheme = () =>  {
-        if (document.body.classList.contains('dark-mode')) {
-            document.body.classList.replace('dark-mode', 'light-mode');
-            localStorage.setItem('theme', 'light');
-        } else {
-            document.body.classList.replace('light-mode', 'dark-mode');
-            localStorage.setItem('theme', 'dark');
-        }
-    }
-    // Function to read text
-    const readText = (text) => {
-        const msg = new SpeechSynthesisUtterance(text);
-        window.speechSynthesis.speak(msg);
+    const [contrast, setContrast] = useState(localStorage.getItem('contrast') || 'normal');
+    const [textSize, setTextSize] = useState(localStorage.getItem('textSize') || 'medium');
+
+    useEffect(() => {
+        // Apply the class names when the component mounts or when contrast/textSize changes
+        document.body.className = `contrast-${contrast} text-${textSize}`;
+    }, [contrast, textSize]);
+
+    const handleContrastChange = (newContrast) => {
+        setContrast(newContrast);
+        localStorage.setItem('contrast', newContrast);
+        document.body.className = `contrast-${newContrast} text-${textSize}`;
     };
 
-    document.addEventListener('DOMContentLoaded', () => {
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.add('light-mode');
-        }
-    });
+    const handleTextSizeChange = (newTextSize) => {
+        setTextSize(newTextSize);
+        localStorage.setItem('textSize', newTextSize);
+        document.body.className = `contrast-${contrast} text-${newTextSize}`;
+    };
 
     return (
-        <div>
-            <button id="theme-toggle" onClick={toggleTheme}>Toggle Dark/Light Mode</button>
-            <div>
-                <p id="content-to-read">This is a sample text to read.</p>
-                <button onClick={() => readText(document.getElementById('content-to-read').innerText)}>Read Text</button>
+        <div className="settings-container">
+            <h1>Settings</h1>
+            {/* Contrast Section */}
+            <div className="settings-section">
+                <h2>Contrast</h2>
+                <div className="button-group">
+                    <button onClick={() => handleContrastChange('normal')}>Normal</button>
+                    <button onClick={() => handleContrastChange('high')}>High</button>
+                    <button onClick={() => handleContrastChange('low')}>Low</button>
+                </div>
+            </div>
+            {/* Text Size Section */}
+            <div className="settings-section">
+                <h2>Text Size</h2>
+                <div className="button-group">
+                    <button onClick={() => handleTextSizeChange('small')}>Small</button>
+                    <button onClick={() => handleTextSizeChange('medium')}>Medium</button>
+                    <button onClick={() => handleTextSizeChange('large')}>Large</button>
+                </div>
             </div>
         </div>
     );
 }
 
 export default AccessibilitySettings;
-

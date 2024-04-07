@@ -5,21 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f340bd07-4ac0-4449-aada-630b8644d5d9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/AdminDashboard.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/AdminDashboard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/GDPR.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/GDPR.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/apiRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/apiRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/middleware/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/middleware/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/Question.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/Question.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/Submission.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/Submission.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/submissions.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/submissions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/utils/email-util.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/email-util.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/utils/passwordResetEmailTemplate.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/passwordResetEmailTemplate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/HOC/ProtectedRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/HOC/ProtectedRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/HeroSection.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/HeroSection.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/HeroSection.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/HeroSection.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/footer.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/common/footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/footer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/navbar.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/common/navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/context/AuthContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/context/AuthContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/hooks/useForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Feedback.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/AdminDashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/AdminDashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/HomePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Login.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/QuestionList.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/QuestionList.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/QuestionList.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/QuestionList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/QuestionView.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/QuestionView.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/QuestionView.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/QuestionView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Settings.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Settings.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/Settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/SignUp.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/SignUp.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/SignUp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/UploadQuestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/UploadQuestion.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,19 +73,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend/utils" />
@@ -91,11 +116,23 @@
       <workItem from="1711221999824" duration="1662000" />
       <workItem from="1711399863514" duration="6779000" />
       <workItem from="1711554425555" duration="1399000" />
-      <workItem from="1711833804115" duration="29884000" />
+      <workItem from="1711833804115" duration="47574000" />
+      <workItem from="1712238039980" duration="66311000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

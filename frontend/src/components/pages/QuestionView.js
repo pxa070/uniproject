@@ -63,16 +63,7 @@ const QuestionView = () => {
 
     return (
         <div className='QuestionView'>
-            <p style={{
-                marginBottom: "10px",
-                fontSize: "24px",
-                fontWeight: "bold",
-                color: "#333",
-                textAlign: "center",
-                padding: "15px",
-                borderRadius: "8px",
-                boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
-            }}>Question View</p>
+            <h1>Question View</h1>
             {
                 isFetching ? <p>Loading...</p> :
                     <>
@@ -107,7 +98,7 @@ const QuestionView = () => {
                             {error && <p style={{color : "red"}}>{error}</p>}
                             <div className='pageContainer'>
                                 <div className='ViewContainer'>
-                                    <p className='questionText'>{question.question_text}</p>
+                                    <h3 className='questionText'>{question.question_text}</h3>
                                     <div className="input-group">
                                         <textarea value={answer} onChange={(e) => setAnswer(e.target.value)} placeholder='Enter Answer Here' name="" id="txt" cols="30" rows="10"></textarea>
                                         <button onClick={postAnswer} className="login-button textbutton" disabled={isSubmitting}>{isSubmitting ? "Submitting..." : "Submit"}</button>

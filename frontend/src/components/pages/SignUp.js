@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './SignUp.css';
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from 'axios';
 import {useAuth} from "../context/AuthContext";
 function SignUp() {
@@ -71,6 +71,11 @@ function SignUp() {
                     </div>
                     {error && <p className="error">{error}</p>}
                     <button type="submit" className="signup-button">Submit</button>
+
+
+                    <div className="GDPR-link">
+                        By signing up to StudyHub, you agree to our <Link to="/GDPR">Privacy Policy.</Link>
+                    </div>
 
                 </form>
             </div>

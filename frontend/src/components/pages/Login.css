@@ -85,14 +85,37 @@
 .login-button:hover {
     background-color: #40e0d0;
 }
-.signup-link {
+
+.signing-link{
     margin-top: 15px;
+    margin-bottom: 15px;
     text-align: center;
 }
-.signup-link a {
+
+.signing-link a{
     color: #40e0d0;
-    text-decoration: none; /* Optional: removes underline */
+    text-decoration: none;
 }
-.signup-link a:hover {
-    text-decoration: underline; /* Optional: adds underline on hover */
+
+.signing-link a:hover{
+    text-decoration: underline;
 }
+
+
+
+
+.forgot-link{
+
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.forgot-link a{
+    color: #40e0d0;
+    text-decoration: none;
+}
+
+.forgot-link a:hover{
+    text-decoration: underline;
+}
+

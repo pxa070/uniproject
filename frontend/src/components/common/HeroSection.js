@@ -16,7 +16,7 @@ function HeroSection() {
         <div className='hero-container'>
             <video src='/Chemical_Periodic_Table_with_solution.mp4' autoPlay loop muted className='hero-video'></video>
             <h1>EXPLORE KNOWLEDGE</h1>
-            <p>Find resources for your study questions</p>
+            <h2>Find resources for your study questions</h2>
             <div className='hero-btns'>
                 <Button
                     className='btns'

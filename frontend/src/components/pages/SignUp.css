@@ -89,3 +89,19 @@
     margin-top: -10px;
     margin-bottom: 10px;
 }
+
+.GDPR-link{
+    margin-top: 15px;
+    text-align: center;
+}
+
+.GDPR-link a{
+    color: #40e0d0;
+    text-decoration: none;
+}
+
+.GDPR-link a:hover{
+
+    text-decoration: underline; /* Optional: adds underline on hover */
+
+}

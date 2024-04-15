@@ -7,6 +7,7 @@ const authMiddleware = (req, res, next) => {
     }
     const token = header.replace('Bearer ', '');
 
+    //Enforcing and checking authorisation of users to perform certain actions
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.userId = decoded.userId;

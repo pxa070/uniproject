@@ -5,7 +5,7 @@ const extractKeywords = require('./keywordExtraction');
 const classifier = new natural.BayesClassifier();
 
 // Assuming you have some training data available
-// This could be an array of objects with 'text' and 'label' properties
+//An array of objects with 'text' and 'label' properties, to train the NLP model to identify topics more accurately
 const trainingData = [
     { text: "What is photosynthesis?", label: "Biology" },
     { text: "How do we solve this algebraic expression?", label: "Mathematics" },

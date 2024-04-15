@@ -55,7 +55,7 @@ Then displaying tables by submitting '\dt' and '\d' followed by the table you wo
 2. Open the backend terminal; execute the command 'npm run dev' to start the server
 3. Run 'npm start' in the frontend directory terminal, to run the frontend.
 
-Now your StudyHub web application should be accessible via http://localhost:5001 (or whichever port you configured)
+Now your StudyHub web application should be accessible via http://localhost:3000 (or whichever port you configured)
 
 # 5. Default User credentials: 
 

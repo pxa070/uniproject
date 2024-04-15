@@ -30,6 +30,7 @@ function Profile() {
         };
     }, [profile.profile]);
 
+    //Handles file change when user uploads a new profile picture
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -39,6 +40,7 @@ function Profile() {
         }
     };
 
+    //Handles changes to username and password once submit is clicked
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (isUpdating) {

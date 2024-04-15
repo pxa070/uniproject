@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {useNavigate, useParams} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import "./QuestionView.css";
 import axios from 'axios';
 import 'react-modern-drawer/dist/index.css'
@@ -8,7 +8,6 @@ import GaugeChart from 'react-gauge-chart'
 
 const QuestionView = () => {
     const { id } = useParams()
-    const navigate = useNavigate(); // Add this for navigation
     const [question, setQuestion] = useState(undefined)
     const [isFetching, setIsFetching] = useState(true);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -57,9 +56,7 @@ const QuestionView = () => {
         fetchQuestion()
     }, [])
 
-    const handleViewAnswer = () => {
-        navigate(`/model-answer/${id}`); // Redirect to model answer page
-    };
+
 
     return (
         <div className='QuestionView'>

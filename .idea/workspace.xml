@@ -5,8 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f340bd07-4ac0-4449-aada-630b8644d5d9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/tests/middleware/auth.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mydatabase_dump.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/utils/analyser.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/analyser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup_database_dump.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/CardItem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/Cards.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/Cards.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/navbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/Feedback.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/QuestionView.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/QuestionView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/SignUp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/SubjectAreas.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/SubjectAreas.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +32,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -50,11 +66,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/tests/middleware" />
+      <recent name="$PROJECT_DIR$/backend/tests" />
       <recent name="$PROJECT_DIR$/backend/utils" />
       <recent name="$PROJECT_DIR$/frontend" />
       <recent name="$PROJECT_DIR$/backend/routes" />
-      <recent name="$PROJECT_DIR$/backend/models" />
-      <recent name="$PROJECT_DIR$/frontend/src/components/common" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -79,7 +95,8 @@
       <workItem from="1711399863514" duration="6779000" />
       <workItem from="1711554425555" duration="1399000" />
       <workItem from="1711833804115" duration="47574000" />
-      <workItem from="1712238039980" duration="70866000" />
+      <workItem from="1712238039980" duration="75505000" />
+      <workItem from="1712581138963" duration="19196000" />
     </task>
     <servers />
   </component>
